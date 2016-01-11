@@ -67,25 +67,32 @@ namespace LogComponent
           get 
           {
               List<string> lines = new List<string>();
-              DataGridViewRow[] rows = CopyOfDataGridRows(dgv);
-
-              using (DataGridView temp = new DataGridView())
+              try
               {
-                  // We need 8 columns...
-                  for (int i = 0; i < 8; i++ )
-                  {
-                      temp.Columns.Add(i.ToString(), i.ToString());
-                  }
+                  DataGridViewRow[] rows = CopyOfDataGridRows(dgv);
 
-                  temp.Rows.AddRange(rows);
-                  temp.Sort(temp.Columns[0], ListSortDirection.Ascending);                  
-
-                  // Get all the data from our data grid view into a csv file...
-                  foreach (DataGridViewRow row in temp.Rows)
+                  using (DataGridView temp = new DataGridView())
                   {
-                      var cells = row.Cells.Cast<DataGridViewCell>();
-                      lines.Add(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
+                      // We need 8 columns...
+                      for (int i = 0; i < 8; i++)
+                      {
+                          temp.Columns.Add(i.ToString(), i.ToString());
+                      }
+
+                      temp.Rows.AddRange(rows);
+                      temp.Sort(temp.Columns[0], ListSortDirection.Ascending);
+
+                      // Get all the data from our data grid view into a csv file...
+                      foreach (DataGridViewRow row in temp.Rows)
+                      {
+                          var cells = row.Cells.Cast<DataGridViewCell>();
+                          lines.Add(string.Join(",", cells.Select(cell => cell.Value).ToArray()));
+                      }
                   }
+              }
+              catch(ArgumentNullException ex)
+              {
+                  // Log the offending log-file name, as it's probabaly in the wrong format.
               }
               return lines.ToArray();
           }

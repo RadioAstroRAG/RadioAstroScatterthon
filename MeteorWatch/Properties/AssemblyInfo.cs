@@ -36,11 +36,15 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.3.4.24")]
-[assembly: AssemblyFileVersion("1.3.4.24")]
+[assembly: AssemblyVersion("1.3.4.25")]
+[assembly: AssemblyFileVersion("1.3.4.25")]
 
 /// Change history
 /// 
+// 1.2.4.25 - 11/01/2016
+//
+// Now handling incorrectly formatted log files with some grace...
+//
 // 1.2.4.24 - 24/12/2015
 //
 // Refactored RMOB and Preview code.

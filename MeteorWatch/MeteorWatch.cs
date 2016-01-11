@@ -359,24 +359,31 @@ namespace MeteorWatch
         {
             string[] fileContent = logFileComponent.LogFileContentSortedByTime;
 
-            string savedFileName = SaveBasicLogFile(fileContent);
-
-            SaveTimeStamps(fileContent);
-
-            fileContent = logFileComponent.LogFileContentSortedByTime;
-
-            if (checkGenerateRMOB.Checked)
+            if (fileContent.Length > 0)
             {
-                ProcessRmobFileData(fileContent);
-                SaveRmobFile();
+                string savedFileName = SaveBasicLogFile(fileContent);
+
+                SaveTimeStamps(fileContent);
+
+                fileContent = logFileComponent.LogFileContentSortedByTime;
+
+                if (checkGenerateRMOB.Checked)
+                {
+                    ProcessRmobFileData(fileContent);
+                    SaveRmobFile();
+                }
+
+                // Update labels if necessary...
+                string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(savedFileName);
+                if (!currentLogFileName.Contains(fileNameWithoutExtension))
+                {
+                    lblLogName.Text = savedFileName;
+                    currentLogFileName = fileNameWithoutExtension;
+                }
             }
-
-            // Update labels if necessary...
-            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(savedFileName);
-            if (!currentLogFileName.Contains(fileNameWithoutExtension))
+            else
             {
-                lblLogName.Text = savedFileName;
-                currentLogFileName = fileNameWithoutExtension;
+                MessageBox.Show("Unless you are trying to save an empty file - please remove the currently loaded log file, as it seems to have incorrect format...", "Warning");
             }
         }
 
