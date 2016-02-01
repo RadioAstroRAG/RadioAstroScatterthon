@@ -63,10 +63,6 @@ namespace MeteorWatch
 
                         if (count == 0)
                         {
-                        //    dataGridView2.Rows[j].Cells[i].Style.BackColor = colorList[0];
-                        //}
-                        //else if (count == -1) //|| hourlyCount.Key
-                        //{
                             dataGridView2.Rows[j].Cells[i].Style.BackColor = Color.Black;
                         }
                         else
@@ -169,8 +165,12 @@ namespace MeteorWatch
                 dataGridView2.Columns.Add(column);
             }
 
+            // Blank "divider" column...
             dataGridView2.Columns.Add(CreateNewTextBoxColumn(""));
+            // Colorgramme color range column...
             dataGridView2.Columns.Add(CreateNewTextBoxColumn(""));
+            // "Top count" column...
+            dataGridView2.Columns.Add(CreateNewTextBoxColumn("", 30));
 
             // Get the height of the row...
             int rowHeight = (int)Math.Ceiling(20 * decimal.Parse(comboPeriod.SelectedItem.ToString()));
@@ -182,12 +182,22 @@ namespace MeteorWatch
             }
 
             // Set the maximum range cell...
-            dataGridView2.Rows[numberOfRows - 1].Cells[daysInMonth + 1].Value = maxEventsThisMonth.ToString();
-            dataGridView2.Rows[numberOfRows - 1].Cells[daysInMonth + 1].Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridView2.Rows[numberOfRows - 1].Cells[daysInMonth + 2].Value = maxEventsThisMonth.ToString();
+            dataGridView2.Rows[numberOfRows - 1].Cells[daysInMonth + 2].Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 
+
+            // Now take care of the "color reference" column...
+            List<Color> referenceColorList = PrepareListOfMultiColours(numberOfRows);
+
+            int coloursRow = dataGridView2.Columns.Count - 2;
+
+            for (int hour = 0; hour < numberOfRows; hour++)
+            {
+                dataGridView2.Rows[hour].Cells[coloursRow].Style.BackColor = referenceColorList[hour];
+            }
         }
 
-        private static DataGridViewTextBoxColumn CreateNewTextBoxColumn(string dayOfMonth)
+        private static DataGridViewTextBoxColumn CreateNewTextBoxColumn(string dayOfMonth, int colWidth = 20)
         {
             DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
 
@@ -195,7 +205,7 @@ namespace MeteorWatch
             column.Name = dayOfMonth;
             column.ReadOnly = true;
             column.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            column.Width = 20;
+            column.Width = colWidth;
             return column;
         }
 

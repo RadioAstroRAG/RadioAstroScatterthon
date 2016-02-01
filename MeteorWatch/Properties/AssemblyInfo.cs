@@ -36,11 +36,16 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.3.4.25")]
-[assembly: AssemblyFileVersion("1.3.4.25")]
+[assembly: AssemblyVersion("1.3.4.26")]
+[assembly: AssemblyFileVersion("1.3.4.26")]
 
 /// Change history
 /// 
+// 1.2.4.26 - 01/02/2016
+//
+// Extended width of column with top even count for readability in "Classifications preview" tab.
+// Added a column with colour reference in "Classifications preview" tab.
+//
 // 1.2.4.25 - 11/01/2016
 //
 // Now handling incorrectly formatted log files with some grace...
