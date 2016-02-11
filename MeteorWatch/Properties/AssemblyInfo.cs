@@ -36,11 +36,16 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.3.4.26")]
-[assembly: AssemblyFileVersion("1.3.4.26")]
+[assembly: AssemblyVersion("1.3.4.27")]
+[assembly: AssemblyFileVersion("1.3.4.27")]
 
 /// Change history
 /// 
+// 1.3.4.27 - 11/02/2016
+//
+// RMOB view was broken after categories list was changed. No longer using indexes,
+// but hard-coded category values instead...
+//
 // 1.2.4.26 - 01/02/2016
 //
 // Extended width of column with top even count for readability in "Classifications preview" tab.
