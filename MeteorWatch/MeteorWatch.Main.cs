@@ -298,7 +298,7 @@ namespace MeteorWatch
                                 numberOfSplitRecords++;
                             }
 
-                            if (currentClass != string.Empty && currentClass != categories[1] && currentClass != categories[4])
+                            if (currentClass != string.Empty && currentClass != "Meteor trail" && currentClass != "Head echo")
                             {
                                 // We will subtract these afterwards...
                                 wrongClassEvents++;
