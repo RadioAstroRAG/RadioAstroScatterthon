@@ -178,6 +178,8 @@ namespace MeteorWatch
             if (Directory.Exists(directory))
             {
                 openFileDialog1.InitialDirectory = directory;
+                openFileDialog1.RestoreDirectory = true;
+                openFileDialog1.AutoUpgradeEnabled = false;
             }
 
             if (DialogResult.OK == openFileDialog1.ShowDialog())
