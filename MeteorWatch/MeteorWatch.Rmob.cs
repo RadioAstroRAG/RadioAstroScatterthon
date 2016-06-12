@@ -216,11 +216,14 @@ namespace MeteorWatch
         {
             currentRmobDate = monthAndYear;
 
-            List<Color> colorList = PrepareColourRangeForHighestCount(monthAndYear);
+            List<Color> colorList = ProcessHighestCountValue(monthAndYear);
 
-            DrawGridMulticolorScales();
+            if (colorList != null)
+            {
+                DrawGridMulticolorScales();
 
-            AddColorgramDaysToMonthPreview(monthAndYear, colorList);
+                AddColorgramDaysToMonthPreview(monthAndYear, colorList);
+            }
         }
 
         private void DrawGridMulticolorScales()
@@ -241,9 +244,12 @@ namespace MeteorWatch
                 return;
             }
 
-            List<Color> colorList = PrepareColourRangeForHighestCount(currentLogDate);
+            List<Color> colorList = ProcessHighestCountValue(currentLogDate);
 
-            AddColorgramDaysToMonthPreview(currentLogDate, colorList);
+            if (colorList != null)
+            {
+                AddColorgramDaysToMonthPreview(currentLogDate, colorList);
+            }
         }
 
         private void AddColorgramDaysToMonthPreview(DateTime dt, List<Color> colorList)
@@ -288,32 +294,19 @@ namespace MeteorWatch
 
         private void txtWhatIf_KeyPress(object sender, KeyPressEventArgs e)
         {
+            // Only respond to numeric input or Enter key...
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
-        }
 
-        private void btnWhatIf_Click(object sender, EventArgs e)
-        {
-            int tempTopMeteorCount = int.Parse(txtWhatIf.Text.Trim());
-
-            if (tempTopMeteorCount > 500 || tempTopMeteorCount < 24)
+            if (e.KeyChar == (char)Keys.Return)
             {
-                MessageBox.Show("Please enter values below 500 and above the actual value (or 24 as a minimum).");
-                return;
+                e.Handled = true;
+                radioColourByRandom_CheckedChanged(radioColourByRandom, null);
             }
-
-            int backupOfConfigValue = config.AnnualTopMeteorCount;
-
-            config.AnnualTopMeteorCount = tempTopMeteorCount;
-            whatIfPreview = true;
-
-            RedrawPreview(currentRmobDate);
-
-            // Reset back the actual top values...
-            whatIfPreview = false;
-            config.AnnualTopMeteorCount = backupOfConfigValue;
         }
+
+
     }
 }

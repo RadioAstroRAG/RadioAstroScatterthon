@@ -37,9 +37,10 @@ namespace MeteorWatch
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Scatterthon));
             this.tabRmob = new System.Windows.Forms.TabPage();
-            this.btnWhatIf = new System.Windows.Forms.Button();
+            this.radioColourByRandom = new System.Windows.Forms.RadioButton();
+            this.radioColourByMonth = new System.Windows.Forms.RadioButton();
+            this.radioColourByYear = new System.Windows.Forms.RadioButton();
             this.txtWhatIf = new System.Windows.Forms.TextBox();
-            this.lblWhatIf = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
             this.lblPreviewedMonth = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -82,6 +83,8 @@ namespace MeteorWatch
             this.tabConfig = new System.Windows.Forms.TabPage();
             this.btnSaveConfig = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.checkDropHistory = new System.Windows.Forms.CheckBox();
+            this.checkGenerateRMOB = new System.Windows.Forms.CheckBox();
             this.txtScreenshotsDelay = new System.Windows.Forms.TextBox();
             this.lblScreenshotsDelay = new System.Windows.Forms.Label();
             this.checkPagination = new System.Windows.Forms.CheckBox();
@@ -96,7 +99,6 @@ namespace MeteorWatch
             this.chkDefaultStation = new System.Windows.Forms.CheckBox();
             this.cmbStationNames = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.checkIgnoreTopCount = new System.Windows.Forms.CheckBox();
             this.btnUpdateTopMeteorCount = new System.Windows.Forms.Button();
             this.txtAnnualTopMeteorCount = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -109,8 +111,6 @@ namespace MeteorWatch
             this.dlgOpenDirectory = new System.Windows.Forms.FolderBrowserDialog();
             this.dlgSaveDirectory = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTipSync = new System.Windows.Forms.ToolTip(this.components);
-            this.checkDropHistory = new System.Windows.Forms.CheckBox();
-            this.checkGenerateRMOB = new System.Windows.Forms.CheckBox();
             this.btnGo = new System.Windows.Forms.Button();
             this.btnPrevLog = new System.Windows.Forms.Button();
             this.btnNextLog = new System.Windows.Forms.Button();
@@ -125,6 +125,7 @@ namespace MeteorWatch
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabCleanse = new System.Windows.Forms.TabPage();
             this.innerSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.logFileComponent = new LogComponent.LogFileViewer();
             this.lblLogName = new System.Windows.Forms.Label();
             this.lblLogScroll = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -150,7 +151,6 @@ namespace MeteorWatch
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutScatterthonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logFileComponent = new LogComponent.LogFileViewer();
             this.tabRmob.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabConfig.SuspendLayout();
@@ -176,9 +176,10 @@ namespace MeteorWatch
             // 
             // tabRmob
             // 
-            this.tabRmob.Controls.Add(this.btnWhatIf);
+            this.tabRmob.Controls.Add(this.radioColourByRandom);
+            this.tabRmob.Controls.Add(this.radioColourByMonth);
+            this.tabRmob.Controls.Add(this.radioColourByYear);
             this.tabRmob.Controls.Add(this.txtWhatIf);
-            this.tabRmob.Controls.Add(this.lblWhatIf);
             this.tabRmob.Controls.Add(this.btnExport);
             this.tabRmob.Controls.Add(this.lblPreviewedMonth);
             this.tabRmob.Controls.Add(this.dataGridView1);
@@ -192,35 +193,52 @@ namespace MeteorWatch
             this.tabRmob.Text = "RMOB";
             this.tabRmob.UseVisualStyleBackColor = true;
             // 
-            // btnWhatIf
+            // radioColourByRandom
             // 
-            this.btnWhatIf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnWhatIf.Location = new System.Drawing.Point(288, 637);
-            this.btnWhatIf.Name = "btnWhatIf";
-            this.btnWhatIf.Size = new System.Drawing.Size(75, 23);
-            this.btnWhatIf.TabIndex = 11;
-            this.btnWhatIf.Text = "Show";
-            this.btnWhatIf.UseVisualStyleBackColor = true;
-            this.btnWhatIf.Click += new System.EventHandler(this.btnWhatIf_Click);
+            this.radioColourByRandom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.radioColourByRandom.AutoSize = true;
+            this.radioColourByRandom.Location = new System.Drawing.Point(19, 637);
+            this.radioColourByRandom.Name = "radioColourByRandom";
+            this.radioColourByRandom.Size = new System.Drawing.Size(161, 17);
+            this.radioColourByRandom.TabIndex = 25;
+            this.radioColourByRandom.Text = "Recalculate by Top Count of";
+            this.radioColourByRandom.UseVisualStyleBackColor = true;
+            this.radioColourByRandom.CheckedChanged += new System.EventHandler(this.radioColourByRandom_CheckedChanged);
+            // 
+            // radioColourByMonth
+            // 
+            this.radioColourByMonth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.radioColourByMonth.AutoSize = true;
+            this.radioColourByMonth.Checked = true;
+            this.radioColourByMonth.Location = new System.Drawing.Point(19, 566);
+            this.radioColourByMonth.Name = "radioColourByMonth";
+            this.radioColourByMonth.Size = new System.Drawing.Size(182, 17);
+            this.radioColourByMonth.TabIndex = 24;
+            this.radioColourByMonth.TabStop = true;
+            this.radioColourByMonth.Text = "Recalculate by Top Month Count";
+            this.radioColourByMonth.UseVisualStyleBackColor = true;
+            this.radioColourByMonth.CheckedChanged += new System.EventHandler(this.radioColourByMonth_CheckedChanged);
+            // 
+            // radioColourByYear
+            // 
+            this.radioColourByYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.radioColourByYear.AutoSize = true;
+            this.radioColourByYear.Location = new System.Drawing.Point(19, 602);
+            this.radioColourByYear.Name = "radioColourByYear";
+            this.radioColourByYear.Size = new System.Drawing.Size(185, 17);
+            this.radioColourByYear.TabIndex = 23;
+            this.radioColourByYear.Text = "Racalculate by Top Annual Count";
+            this.radioColourByYear.UseVisualStyleBackColor = true;
+            this.radioColourByYear.CheckedChanged += new System.EventHandler(this.radioColourByYear_CheckedChanged);
             // 
             // txtWhatIf
             // 
             this.txtWhatIf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtWhatIf.Location = new System.Drawing.Point(209, 639);
+            this.txtWhatIf.Location = new System.Drawing.Point(184, 634);
             this.txtWhatIf.Name = "txtWhatIf";
-            this.txtWhatIf.Size = new System.Drawing.Size(75, 20);
+            this.txtWhatIf.Size = new System.Drawing.Size(51, 20);
             this.txtWhatIf.TabIndex = 10;
             this.txtWhatIf.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtWhatIf_KeyPress);
-            // 
-            // lblWhatIf
-            // 
-            this.lblWhatIf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblWhatIf.AutoSize = true;
-            this.lblWhatIf.Location = new System.Drawing.Point(15, 645);
-            this.lblWhatIf.Name = "lblWhatIf";
-            this.lblWhatIf.Size = new System.Drawing.Size(188, 13);
-            this.lblWhatIf.TabIndex = 9;
-            this.lblWhatIf.Text = "What if top meteor count per hour was";
             // 
             // btnExport
             // 
@@ -630,6 +648,8 @@ namespace MeteorWatch
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.checkDropHistory);
+            this.panel1.Controls.Add(this.checkGenerateRMOB);
             this.panel1.Controls.Add(this.txtScreenshotsDelay);
             this.panel1.Controls.Add(this.lblScreenshotsDelay);
             this.panel1.Controls.Add(this.checkPagination);
@@ -644,7 +664,6 @@ namespace MeteorWatch
             this.panel1.Controls.Add(this.chkDefaultStation);
             this.panel1.Controls.Add(this.cmbStationNames);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.checkIgnoreTopCount);
             this.panel1.Controls.Add(this.btnUpdateTopMeteorCount);
             this.panel1.Controls.Add(this.txtAnnualTopMeteorCount);
             this.panel1.Controls.Add(this.label2);
@@ -656,6 +675,36 @@ namespace MeteorWatch
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(964, 610);
             this.panel1.TabIndex = 17;
+            // 
+            // checkDropHistory
+            // 
+            this.checkDropHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkDropHistory.AutoSize = true;
+            this.checkDropHistory.Checked = true;
+            this.checkDropHistory.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkDropHistory.Location = new System.Drawing.Point(216, 392);
+            this.checkDropHistory.Name = "checkDropHistory";
+            this.checkDropHistory.Size = new System.Drawing.Size(113, 17);
+            this.checkDropHistory.TabIndex = 37;
+            this.checkDropHistory.Text = "Drop Undo History";
+            this.toolTipSync.SetToolTip(this.checkDropHistory, "Drop my Undo history on navigating to next log file. \r\nTicking this box will stop" +
+        " Scatterthon taking up too much computer memory.");
+            this.checkDropHistory.UseVisualStyleBackColor = true;
+            // 
+            // checkGenerateRMOB
+            // 
+            this.checkGenerateRMOB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkGenerateRMOB.AutoSize = true;
+            this.checkGenerateRMOB.Checked = true;
+            this.checkGenerateRMOB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkGenerateRMOB.Location = new System.Drawing.Point(216, 367);
+            this.checkGenerateRMOB.Name = "checkGenerateRMOB";
+            this.checkGenerateRMOB.Size = new System.Drawing.Size(169, 17);
+            this.checkGenerateRMOB.TabIndex = 36;
+            this.checkGenerateRMOB.Text = "Generate RMOB as I navigate";
+            this.toolTipSync.SetToolTip(this.checkGenerateRMOB, "Generate RMOB data on navigating to next log file.\r\nUnticking this option speeds " +
+        "up going from file to file.");
+            this.checkGenerateRMOB.UseVisualStyleBackColor = true;
             // 
             // txtScreenshotsDelay
             // 
@@ -791,18 +840,6 @@ namespace MeteorWatch
             this.label1.TabIndex = 22;
             this.label1.Text = "Station Name";
             // 
-            // checkIgnoreTopCount
-            // 
-            this.checkIgnoreTopCount.AutoSize = true;
-            this.checkIgnoreTopCount.Checked = true;
-            this.checkIgnoreTopCount.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkIgnoreTopCount.Location = new System.Drawing.Point(367, 239);
-            this.checkIgnoreTopCount.Name = "checkIgnoreTopCount";
-            this.checkIgnoreTopCount.Size = new System.Drawing.Size(208, 17);
-            this.checkIgnoreTopCount.TabIndex = 21;
-            this.checkIgnoreTopCount.Text = "Ignore annual top meteor count setting";
-            this.checkIgnoreTopCount.UseVisualStyleBackColor = true;
-            // 
             // btnUpdateTopMeteorCount
             // 
             this.btnUpdateTopMeteorCount.Location = new System.Drawing.Point(276, 233);
@@ -879,36 +916,6 @@ namespace MeteorWatch
             this.btnApplySettings.Text = "Reload";
             this.btnApplySettings.UseVisualStyleBackColor = true;
             this.btnApplySettings.Click += new System.EventHandler(this.btnApplySettings_Click);
-            // 
-            // checkDropHistory
-            // 
-            this.checkDropHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkDropHistory.AutoSize = true;
-            this.checkDropHistory.Checked = true;
-            this.checkDropHistory.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkDropHistory.Location = new System.Drawing.Point(294, 633);
-            this.checkDropHistory.Name = "checkDropHistory";
-            this.checkDropHistory.Size = new System.Drawing.Size(113, 17);
-            this.checkDropHistory.TabIndex = 21;
-            this.checkDropHistory.Text = "Drop Undo History";
-            this.toolTipSync.SetToolTip(this.checkDropHistory, "Drop my Undo history on navigating to next log file. \r\nTicking this box will stop" +
-        " Scatterthon taking up too much computer memory.");
-            this.checkDropHistory.UseVisualStyleBackColor = true;
-            // 
-            // checkGenerateRMOB
-            // 
-            this.checkGenerateRMOB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkGenerateRMOB.AutoSize = true;
-            this.checkGenerateRMOB.Checked = true;
-            this.checkGenerateRMOB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkGenerateRMOB.Location = new System.Drawing.Point(106, 633);
-            this.checkGenerateRMOB.Name = "checkGenerateRMOB";
-            this.checkGenerateRMOB.Size = new System.Drawing.Size(169, 17);
-            this.checkGenerateRMOB.TabIndex = 20;
-            this.checkGenerateRMOB.Text = "Generate RMOB as I navigate";
-            this.toolTipSync.SetToolTip(this.checkGenerateRMOB, "Generate RMOB data on navigating to next log file.\r\nUnticking this option speeds " +
-        "up going from file to file.");
-            this.checkGenerateRMOB.UseVisualStyleBackColor = true;
             // 
             // btnGo
             // 
@@ -1059,8 +1066,6 @@ namespace MeteorWatch
             // 
             this.innerSplitContainer.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.innerSplitContainer.Panel2.Controls.Add(this.btnSaveProgress);
-            this.innerSplitContainer.Panel2.Controls.Add(this.checkDropHistory);
-            this.innerSplitContainer.Panel2.Controls.Add(this.checkGenerateRMOB);
             this.innerSplitContainer.Panel2.Controls.Add(this.txtLogIndex);
             this.innerSplitContainer.Panel2.Controls.Add(this.btnGo);
             this.innerSplitContainer.Panel2.Controls.Add(this.lblLogScroll);
@@ -1075,6 +1080,18 @@ namespace MeteorWatch
             this.innerSplitContainer.Size = new System.Drawing.Size(987, 670);
             this.innerSplitContainer.SplitterDistance = 309;
             this.innerSplitContainer.TabIndex = 0;
+            // 
+            // logFileComponent
+            // 
+            this.logFileComponent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.logFileComponent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.logFileComponent.Location = new System.Drawing.Point(17, 29);
+            this.logFileComponent.LogFileContent = new string[0];
+            this.logFileComponent.Name = "logFileComponent";
+            this.logFileComponent.Size = new System.Drawing.Size(279, 638);
+            this.logFileComponent.TabIndex = 1;
             // 
             // lblLogName
             // 
@@ -1385,18 +1402,6 @@ namespace MeteorWatch
             this.aboutScatterthonToolStripMenuItem.Text = "About Scatterthon";
             this.aboutScatterthonToolStripMenuItem.Click += new System.EventHandler(this.aboutScatterthonToolStripMenuItem_Click);
             // 
-            // logFileComponent
-            // 
-            this.logFileComponent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.logFileComponent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.logFileComponent.Location = new System.Drawing.Point(17, 29);
-            this.logFileComponent.LogFileContent = new string[0];
-            this.logFileComponent.Name = "logFileComponent";
-            this.logFileComponent.Size = new System.Drawing.Size(279, 638);
-            this.logFileComponent.TabIndex = 1;
-            // 
             // Scatterthon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1513,7 +1518,6 @@ namespace MeteorWatch
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutScatterthonToolStripMenuItem;
-        private System.Windows.Forms.CheckBox checkIgnoreTopCount;
         private LogFileViewer logFileComponent;
         private System.Windows.Forms.TabPage tabAnnual;
         private System.Windows.Forms.TabPage tabPreview;
@@ -1555,12 +1559,13 @@ namespace MeteorWatch
         private System.Windows.Forms.Label lblScreenshotsDelay;
         private System.Windows.Forms.TextBox txtLogIndex;
         private System.Windows.Forms.Button btnGo;
+        private System.Windows.Forms.Button btnSaveProgress;
+        private System.Windows.Forms.TextBox txtWhatIf;
         private System.Windows.Forms.CheckBox checkDropHistory;
         private System.Windows.Forms.CheckBox checkGenerateRMOB;
-        private System.Windows.Forms.Button btnSaveProgress;
-        private System.Windows.Forms.Button btnWhatIf;
-        private System.Windows.Forms.TextBox txtWhatIf;
-        private System.Windows.Forms.Label lblWhatIf;
+        private System.Windows.Forms.RadioButton radioColourByRandom;
+        private System.Windows.Forms.RadioButton radioColourByMonth;
+        private System.Windows.Forms.RadioButton radioColourByYear;
     }
 }
 

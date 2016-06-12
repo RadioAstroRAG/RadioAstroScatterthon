@@ -30,7 +30,8 @@ namespace MeteorWatch
             {
                 config.AnnualTopMeteorCount = int.Parse(txtAnnualTopMeteorCount.Text.Trim());
 
-                if (currentRmobDate != null)
+                // See if we can and should redraw the colorgramme based on the new annual count.
+                if (currentRmobDate != null && radioColourByYear.Checked)
                 {
                     RedrawPreview(currentRmobDate);
                 }

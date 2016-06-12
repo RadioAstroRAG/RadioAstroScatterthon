@@ -13,6 +13,56 @@ namespace MeteorWatch
 {
     partial class Scatterthon
     {
+        #region Events
+
+        private void radioColourByMonth_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioColourByMonth.Checked)
+            {
+                RedrawPreview(GetRmobDate());
+            }
+        }
+
+        private void radioColourByYear_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioColourByYear.Checked)
+            {
+                RedrawPreview(GetRmobDate());
+            }
+        }
+
+        private void radioColourByRandom_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioColourByRandom.Checked)
+            {               
+                if (string.IsNullOrEmpty(txtWhatIf.Text))
+                {
+                    MessageBox.Show(invalidTopCountMessage);
+                    return;
+                }
+
+                RedrawPreview(currentRmobDate);
+            }
+        }
+
+
+        private void btnImportColorgram_Click(object sender, EventArgs e)
+        {
+            DisplayRmobDataFromFile();
+        }
+
+        #endregion
+
+        private DateTime GetRmobDate()
+        {
+            if (currentRmobDate == null)
+            {
+                string[] logFiles = Directory.GetFiles(config.OriginalLogsDirectory, "event_log20*.txt");
+
+                currentRmobDate = (DateTime)logFileComponent.GetCurrentLogDate(logFiles[currentLogIndex]);
+            }
+            return currentRmobDate;
+        }
         private void LoadPreviewDataGrid()
         {
             List<DateTime> timestamps = GetTimestampsToView();
@@ -209,46 +259,54 @@ namespace MeteorWatch
             return column;
         }
 
-        private List<Color> PrepareColourRangeForHighestCount(DateTime dt)
+        private List<Color> ProcessHighestCountValue(DateTime dt)
         {
             int highestCount = FindHighestCountThisMonth(dt);
 
+            if (radioColourByRandom.Checked)
+            {
+                // Must be using the random user-defined value...
+                int tempTopMeteorCount = 0;
+
+                int.TryParse(txtWhatIf.Text, out tempTopMeteorCount);
+
+                if (tempTopMeteorCount > 500 || tempTopMeteorCount < 24 || tempTopMeteorCount < highestCount)
+                {
+                    MessageBox.Show(invalidTopCountMessage);
+                    return null;
+                }
+                else
+                {
+                    highestCount = tempTopMeteorCount;
+                }
+            }
+            else
+            {
+                if (highestCount > config.AnnualTopMeteorCount)
+                {
+                    config.AnnualTopMeteorCount = highestCount;
+                }
+
+                if (radioColourByYear.Checked)
+                {
+                    highestCount = config.AnnualTopMeteorCount;
+                }
+            }
+
+            return PrepareColourRangeForHighestCount(highestCount);
+        }
+
+        private List<Color> PrepareColourRangeForHighestCount(int highestCount)
+        {
             // Set this value in the grid..
             dataGridView1.Rows[23].Cells[33].Value = highestCount;
             dataGridView1.Rows[23].Cells[33].Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 
-            highestCount = UpdateHighestCount(highestCount);
-
-            if (dataGridView1.Rows[23].Cells[33].Value.ToString() != highestCount.ToString())
-            {
-                dataGridView1.Rows[23].Cells[33].Value = highestCount;
-            }
+            dataGridView1.Rows[23].Cells[33].Value = highestCount;
 
             List<Color> colorList = PrepareListOfMultiColours(highestCount);
 
             return colorList;
-        }
-
-        private int UpdateHighestCount(int highestCount)
-        {
-            if (highestCount < 24)
-            {
-                highestCount = 24;
-                config.AnnualTopMeteorCount = 24;
-            }
-
-            if (!checkIgnoreTopCount.Checked || whatIfPreview)
-            {
-                if (highestCount < config.AnnualTopMeteorCount)
-                {
-                    highestCount = config.AnnualTopMeteorCount;
-                }
-                else if (highestCount > config.AnnualTopMeteorCount)
-                {
-                    config.AnnualTopMeteorCount = highestCount;
-                }
-            }
-            return highestCount;
         }
 
         private void BlackOutDataGrid(DateTime monthAndYear)
@@ -306,10 +364,6 @@ namespace MeteorWatch
             BlackOutDataGrid(DateTime.Now);
         }
 
-        private void btnImportColorgram_Click(object sender, EventArgs e)
-        {
-            DisplayRmobDataFromFile();
-        }
 
         private List<Color> PrepareListOfMultiColours(int topCount)
         {

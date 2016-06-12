@@ -62,6 +62,7 @@ namespace MeteorWatch
 
         // Maps month and year (as a string) to the RMOB file...
         Dictionary<string, RmobFile> rmobFiles = new Dictionary<string, RmobFile>();
+        string invalidTopCountMessage = "Please enter values between the bounds of the actual value (or 24 as a minimum) and 500.";
 
         Color[] standardRange = new Color[5];
 
@@ -609,5 +610,6 @@ namespace MeteorWatch
                 e.Cancel = true;
             }
         }
+
     }
 }
