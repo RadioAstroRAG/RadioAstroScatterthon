@@ -157,7 +157,7 @@ namespace MeteorWatch
                 {
                     string rmobFileToLoad;
 
-                    MakeRmobFileName(out rmobFileToLoad);
+                    MakeRmobFileName(false, out rmobFileToLoad);
 
                     LoadRmobFile(rmobFileToLoad);
                 }

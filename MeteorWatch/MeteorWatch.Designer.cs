@@ -37,10 +37,20 @@ namespace MeteorWatch
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Scatterthon));
             this.tabRmob = new System.Windows.Forms.TabPage();
+            this.btnRecreateRmob = new System.Windows.Forms.Button();
+            this.btnNormalise = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.radioRmobMonth = new System.Windows.Forms.RadioButton();
+            this.radioRmobYear = new System.Windows.Forms.RadioButton();
+            this.radioRmobAll = new System.Windows.Forms.RadioButton();
+            this.lblRecreateRmob = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtWhatIf = new System.Windows.Forms.TextBox();
             this.radioColourByRandom = new System.Windows.Forms.RadioButton();
             this.radioColourByMonth = new System.Windows.Forms.RadioButton();
             this.radioColourByYear = new System.Windows.Forms.RadioButton();
-            this.txtWhatIf = new System.Windows.Forms.TextBox();
+            this.lblNormalise = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.btnExport = new System.Windows.Forms.Button();
             this.lblPreviewedMonth = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -79,7 +89,6 @@ namespace MeteorWatch
             this.Colours = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Scale = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnImportColorgram = new System.Windows.Forms.Button();
-            this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
             this.tabConfig = new System.Windows.Forms.TabPage();
             this.btnSaveConfig = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -111,7 +120,6 @@ namespace MeteorWatch
             this.dlgOpenDirectory = new System.Windows.Forms.FolderBrowserDialog();
             this.dlgSaveDirectory = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTipSync = new System.Windows.Forms.ToolTip(this.components);
-            this.btnGo = new System.Windows.Forms.Button();
             this.btnPrevLog = new System.Windows.Forms.Button();
             this.btnNextLog = new System.Windows.Forms.Button();
             this.btnCopyScreenshot = new System.Windows.Forms.Button();
@@ -137,8 +145,8 @@ namespace MeteorWatch
             this.lblScreenshotName = new System.Windows.Forms.Label();
             this.lblScreenshotCount = new System.Windows.Forms.Label();
             this.tabPreview = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblCategories = new System.Windows.Forms.Label();
+            this.lblTimeUnit = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.btnView = new System.Windows.Forms.Button();
             this.comboPeriod = new System.Windows.Forms.ComboBox();
@@ -152,6 +160,8 @@ namespace MeteorWatch
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutScatterthonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabRmob.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabConfig.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -176,15 +186,17 @@ namespace MeteorWatch
             // 
             // tabRmob
             // 
-            this.tabRmob.Controls.Add(this.radioColourByRandom);
-            this.tabRmob.Controls.Add(this.radioColourByMonth);
-            this.tabRmob.Controls.Add(this.radioColourByYear);
-            this.tabRmob.Controls.Add(this.txtWhatIf);
+            this.tabRmob.Controls.Add(this.btnRecreateRmob);
+            this.tabRmob.Controls.Add(this.btnNormalise);
+            this.tabRmob.Controls.Add(this.groupBox3);
+            this.tabRmob.Controls.Add(this.lblRecreateRmob);
+            this.tabRmob.Controls.Add(this.groupBox2);
+            this.tabRmob.Controls.Add(this.lblNormalise);
+            this.tabRmob.Controls.Add(this.dateTimePicker2);
             this.tabRmob.Controls.Add(this.btnExport);
             this.tabRmob.Controls.Add(this.lblPreviewedMonth);
             this.tabRmob.Controls.Add(this.dataGridView1);
             this.tabRmob.Controls.Add(this.btnImportColorgram);
-            this.tabRmob.Controls.Add(this.monthCalendar2);
             this.tabRmob.Location = new System.Drawing.Point(4, 4);
             this.tabRmob.Name = "tabRmob";
             this.tabRmob.Padding = new System.Windows.Forms.Padding(3);
@@ -193,52 +205,156 @@ namespace MeteorWatch
             this.tabRmob.Text = "RMOB";
             this.tabRmob.UseVisualStyleBackColor = true;
             // 
+            // btnRecreateRmob
+            // 
+            this.btnRecreateRmob.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRecreateRmob.Location = new System.Drawing.Point(895, 360);
+            this.btnRecreateRmob.Name = "btnRecreateRmob";
+            this.btnRecreateRmob.Size = new System.Drawing.Size(75, 23);
+            this.btnRecreateRmob.TabIndex = 32;
+            this.btnRecreateRmob.Text = "Go";
+            this.btnRecreateRmob.UseVisualStyleBackColor = true;
+            this.btnRecreateRmob.Click += new System.EventHandler(this.btnRecreateRmob_Click);
+            // 
+            // btnNormalise
+            // 
+            this.btnNormalise.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNormalise.Location = new System.Drawing.Point(895, 192);
+            this.btnNormalise.Name = "btnNormalise";
+            this.btnNormalise.Size = new System.Drawing.Size(75, 23);
+            this.btnNormalise.TabIndex = 31;
+            this.btnNormalise.Text = "Go";
+            this.btnNormalise.UseVisualStyleBackColor = true;
+            this.btnNormalise.Click += new System.EventHandler(this.btnNormalise_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.radioRmobMonth);
+            this.groupBox3.Controls.Add(this.radioRmobYear);
+            this.groupBox3.Controls.Add(this.radioRmobAll);
+            this.groupBox3.Location = new System.Drawing.Point(818, 253);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(151, 100);
+            this.groupBox3.TabIndex = 30;
+            this.groupBox3.TabStop = false;
+            // 
+            // radioRmobMonth
+            // 
+            this.radioRmobMonth.AutoSize = true;
+            this.radioRmobMonth.Location = new System.Drawing.Point(11, 68);
+            this.radioRmobMonth.Name = "radioRmobMonth";
+            this.radioRmobMonth.Size = new System.Drawing.Size(100, 17);
+            this.radioRmobMonth.TabIndex = 2;
+            this.radioRmobMonth.Text = "Selected Month";
+            this.radioRmobMonth.UseVisualStyleBackColor = true;
+            // 
+            // radioRmobYear
+            // 
+            this.radioRmobYear.AutoSize = true;
+            this.radioRmobYear.Location = new System.Drawing.Point(11, 44);
+            this.radioRmobYear.Name = "radioRmobYear";
+            this.radioRmobYear.Size = new System.Drawing.Size(92, 17);
+            this.radioRmobYear.TabIndex = 1;
+            this.radioRmobYear.Text = "Selected Year";
+            this.radioRmobYear.UseVisualStyleBackColor = true;
+            // 
+            // radioRmobAll
+            // 
+            this.radioRmobAll.AutoSize = true;
+            this.radioRmobAll.Checked = true;
+            this.radioRmobAll.Location = new System.Drawing.Point(11, 20);
+            this.radioRmobAll.Name = "radioRmobAll";
+            this.radioRmobAll.Size = new System.Drawing.Size(62, 17);
+            this.radioRmobAll.TabIndex = 0;
+            this.radioRmobAll.TabStop = true;
+            this.radioRmobAll.Text = "All Time";
+            this.radioRmobAll.UseVisualStyleBackColor = true;
+            // 
+            // lblRecreateRmob
+            // 
+            this.lblRecreateRmob.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblRecreateRmob.AutoSize = true;
+            this.lblRecreateRmob.Location = new System.Drawing.Point(818, 240);
+            this.lblRecreateRmob.Name = "lblRecreateRmob";
+            this.lblRecreateRmob.Size = new System.Drawing.Size(131, 13);
+            this.lblRecreateRmob.TabIndex = 29;
+            this.lblRecreateRmob.Text = "Recreate RMOB files for...";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.txtWhatIf);
+            this.groupBox2.Controls.Add(this.radioColourByRandom);
+            this.groupBox2.Controls.Add(this.radioColourByMonth);
+            this.groupBox2.Controls.Add(this.radioColourByYear);
+            this.groupBox2.Location = new System.Drawing.Point(818, 78);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(151, 107);
+            this.groupBox2.TabIndex = 28;
+            this.groupBox2.TabStop = false;
+            // 
+            // txtWhatIf
+            // 
+            this.txtWhatIf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtWhatIf.Location = new System.Drawing.Point(77, 75);
+            this.txtWhatIf.Name = "txtWhatIf";
+            this.txtWhatIf.Size = new System.Drawing.Size(51, 20);
+            this.txtWhatIf.TabIndex = 27;
+            // 
             // radioColourByRandom
             // 
             this.radioColourByRandom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioColourByRandom.AutoSize = true;
-            this.radioColourByRandom.Location = new System.Drawing.Point(19, 637);
+            this.radioColourByRandom.Location = new System.Drawing.Point(11, 76);
             this.radioColourByRandom.Name = "radioColourByRandom";
-            this.radioColourByRandom.Size = new System.Drawing.Size(161, 17);
-            this.radioColourByRandom.TabIndex = 25;
-            this.radioColourByRandom.Text = "Recalculate by Top Count of";
+            this.radioColourByRandom.Size = new System.Drawing.Size(65, 17);
+            this.radioColourByRandom.TabIndex = 26;
+            this.radioColourByRandom.Text = "Count of";
             this.radioColourByRandom.UseVisualStyleBackColor = true;
-            this.radioColourByRandom.CheckedChanged += new System.EventHandler(this.radioColourByRandom_CheckedChanged);
             // 
             // radioColourByMonth
             // 
             this.radioColourByMonth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioColourByMonth.AutoSize = true;
             this.radioColourByMonth.Checked = true;
-            this.radioColourByMonth.Location = new System.Drawing.Point(19, 566);
+            this.radioColourByMonth.Location = new System.Drawing.Point(11, 49);
             this.radioColourByMonth.Name = "radioColourByMonth";
-            this.radioColourByMonth.Size = new System.Drawing.Size(182, 17);
-            this.radioColourByMonth.TabIndex = 24;
+            this.radioColourByMonth.Size = new System.Drawing.Size(108, 17);
+            this.radioColourByMonth.TabIndex = 25;
             this.radioColourByMonth.TabStop = true;
-            this.radioColourByMonth.Text = "Recalculate by Top Month Count";
+            this.radioColourByMonth.Text = "Top Month Count";
             this.radioColourByMonth.UseVisualStyleBackColor = true;
-            this.radioColourByMonth.CheckedChanged += new System.EventHandler(this.radioColourByMonth_CheckedChanged);
             // 
             // radioColourByYear
             // 
             this.radioColourByYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioColourByYear.AutoSize = true;
-            this.radioColourByYear.Location = new System.Drawing.Point(19, 602);
+            this.radioColourByYear.Location = new System.Drawing.Point(11, 20);
             this.radioColourByYear.Name = "radioColourByYear";
-            this.radioColourByYear.Size = new System.Drawing.Size(185, 17);
-            this.radioColourByYear.TabIndex = 23;
-            this.radioColourByYear.Text = "Racalculate by Top Annual Count";
+            this.radioColourByYear.Size = new System.Drawing.Size(111, 17);
+            this.radioColourByYear.TabIndex = 24;
+            this.radioColourByYear.Text = "Top Annual Count";
             this.radioColourByYear.UseVisualStyleBackColor = true;
-            this.radioColourByYear.CheckedChanged += new System.EventHandler(this.radioColourByYear_CheckedChanged);
             // 
-            // txtWhatIf
+            // lblNormalise
             // 
-            this.txtWhatIf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtWhatIf.Location = new System.Drawing.Point(184, 634);
-            this.txtWhatIf.Name = "txtWhatIf";
-            this.txtWhatIf.Size = new System.Drawing.Size(51, 20);
-            this.txtWhatIf.TabIndex = 10;
-            this.txtWhatIf.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtWhatIf_KeyPress);
+            this.lblNormalise.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblNormalise.AutoSize = true;
+            this.lblNormalise.Location = new System.Drawing.Point(818, 65);
+            this.lblNormalise.Name = "lblNormalise";
+            this.lblNormalise.Size = new System.Drawing.Size(147, 13);
+            this.lblNormalise.TabIndex = 27;
+            this.lblNormalise.Text = "Normalise Colourgramme for...";
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePicker2.Location = new System.Drawing.Point(818, 23);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(151, 20);
+            this.dateTimePicker2.TabIndex = 26;
+            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
             // btnExport
             // 
@@ -609,15 +725,6 @@ namespace MeteorWatch
             this.btnImportColorgram.UseVisualStyleBackColor = true;
             this.btnImportColorgram.Click += new System.EventHandler(this.btnImportColorgram_Click);
             // 
-            // monthCalendar2
-            // 
-            this.monthCalendar2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.monthCalendar2.CalendarDimensions = new System.Drawing.Size(1, 3);
-            this.monthCalendar2.Location = new System.Drawing.Point(754, 8);
-            this.monthCalendar2.Name = "monthCalendar2";
-            this.monthCalendar2.ShowToday = false;
-            this.monthCalendar2.TabIndex = 2;
-            // 
             // tabConfig
             // 
             this.tabConfig.Controls.Add(this.btnSaveConfig);
@@ -917,23 +1024,11 @@ namespace MeteorWatch
             this.btnApplySettings.UseVisualStyleBackColor = true;
             this.btnApplySettings.Click += new System.EventHandler(this.btnApplySettings_Click);
             // 
-            // btnGo
-            // 
-            this.btnGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGo.Location = new System.Drawing.Point(582, 629);
-            this.btnGo.Name = "btnGo";
-            this.btnGo.Size = new System.Drawing.Size(75, 23);
-            this.btnGo.TabIndex = 18;
-            this.btnGo.Text = "Go";
-            this.toolTipSync.SetToolTip(this.btnGo, "Go to specified file number (when sorted by date).");
-            this.btnGo.UseVisualStyleBackColor = true;
-            this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
-            // 
             // btnPrevLog
             // 
             this.btnPrevLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrevLog.Enabled = false;
-            this.btnPrevLog.Location = new System.Drawing.Point(503, 600);
+            this.btnPrevLog.Location = new System.Drawing.Point(503, 628);
             this.btnPrevLog.Name = "btnPrevLog";
             this.btnPrevLog.Size = new System.Drawing.Size(75, 23);
             this.btnPrevLog.TabIndex = 10;
@@ -946,7 +1041,7 @@ namespace MeteorWatch
             // 
             this.btnNextLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNextLog.Enabled = false;
-            this.btnNextLog.Location = new System.Drawing.Point(582, 600);
+            this.btnNextLog.Location = new System.Drawing.Point(582, 628);
             this.btnNextLog.Name = "btnNextLog";
             this.btnNextLog.Size = new System.Drawing.Size(75, 23);
             this.btnNextLog.TabIndex = 11;
@@ -983,7 +1078,7 @@ namespace MeteorWatch
             // txtLogIndex
             // 
             this.txtLogIndex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLogIndex.Location = new System.Drawing.Point(505, 630);
+            this.txtLogIndex.Location = new System.Drawing.Point(423, 630);
             this.txtLogIndex.Name = "txtLogIndex";
             this.txtLogIndex.Size = new System.Drawing.Size(73, 20);
             this.txtLogIndex.TabIndex = 19;
@@ -1067,7 +1162,6 @@ namespace MeteorWatch
             this.innerSplitContainer.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.innerSplitContainer.Panel2.Controls.Add(this.btnSaveProgress);
             this.innerSplitContainer.Panel2.Controls.Add(this.txtLogIndex);
-            this.innerSplitContainer.Panel2.Controls.Add(this.btnGo);
             this.innerSplitContainer.Panel2.Controls.Add(this.lblLogScroll);
             this.innerSplitContainer.Panel2.Controls.Add(this.btnPrevLog);
             this.innerSplitContainer.Panel2.Controls.Add(this.tableLayoutPanel2);
@@ -1110,9 +1204,9 @@ namespace MeteorWatch
             this.lblLogScroll.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLogScroll.Location = new System.Drawing.Point(101, 603);
             this.lblLogScroll.Name = "lblLogScroll";
-            this.lblLogScroll.Size = new System.Drawing.Size(395, 16);
+            this.lblLogScroll.Size = new System.Drawing.Size(358, 16);
             this.lblLogScroll.TabIndex = 17;
-            this.lblLogScroll.Text = "Click on buttons either side to scroll through log files...";
+            this.lblLogScroll.Text = "Click on < or > buttons to scroll through log files...";
             // 
             // tableLayoutPanel2
             // 
@@ -1229,8 +1323,8 @@ namespace MeteorWatch
             // 
             // tabPreview
             // 
-            this.tabPreview.Controls.Add(this.label4);
-            this.tabPreview.Controls.Add(this.label3);
+            this.tabPreview.Controls.Add(this.lblCategories);
+            this.tabPreview.Controls.Add(this.lblTimeUnit);
             this.tabPreview.Controls.Add(this.dateTimePicker1);
             this.tabPreview.Controls.Add(this.btnView);
             this.tabPreview.Controls.Add(this.comboPeriod);
@@ -1244,25 +1338,25 @@ namespace MeteorWatch
             this.tabPreview.Text = "Preview";
             this.tabPreview.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // lblCategories
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(818, 126);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(152, 13);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "Check boxes with categories...";
+            this.lblCategories.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCategories.AutoSize = true;
+            this.lblCategories.Location = new System.Drawing.Point(818, 126);
+            this.lblCategories.Name = "lblCategories";
+            this.lblCategories.Size = new System.Drawing.Size(152, 13);
+            this.lblCategories.TabIndex = 19;
+            this.lblCategories.Text = "Check boxes with categories...";
             // 
-            // label3
+            // lblTimeUnit
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(818, 65);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(138, 13);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "Select Unit of Time (Hour)...";
+            this.lblTimeUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTimeUnit.AutoSize = true;
+            this.lblTimeUnit.Location = new System.Drawing.Point(818, 65);
+            this.lblTimeUnit.Name = "lblTimeUnit";
+            this.lblTimeUnit.Size = new System.Drawing.Size(138, 13);
+            this.lblTimeUnit.TabIndex = 18;
+            this.lblTimeUnit.Text = "Select Unit of Time (Hour)...";
             // 
             // dateTimePicker1
             // 
@@ -1276,7 +1370,7 @@ namespace MeteorWatch
             // 
             this.btnView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnView.Enabled = false;
-            this.btnView.Location = new System.Drawing.Point(894, 345);
+            this.btnView.Location = new System.Drawing.Point(894, 309);
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(75, 23);
             this.btnView.TabIndex = 15;
@@ -1304,7 +1398,7 @@ namespace MeteorWatch
             this.groupBox1.Controls.Add(this.checkedListClasses);
             this.groupBox1.Location = new System.Drawing.Point(818, 140);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(151, 199);
+            this.groupBox1.Size = new System.Drawing.Size(151, 160);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             // 
@@ -1325,7 +1419,7 @@ namespace MeteorWatch
             this.checkedListClasses.Margin = new System.Windows.Forms.Padding(30);
             this.checkedListClasses.Name = "checkedListClasses";
             this.checkedListClasses.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.checkedListClasses.Size = new System.Drawing.Size(125, 165);
+            this.checkedListClasses.Size = new System.Drawing.Size(125, 135);
             this.checkedListClasses.TabIndex = 12;
             this.checkedListClasses.SelectedValueChanged += new System.EventHandler(this.checkedListClasses_SelectedValueChanged);
             // 
@@ -1419,6 +1513,10 @@ namespace MeteorWatch
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Scatterthon_KeyDown);
             this.tabRmob.ResumeLayout(false);
             this.tabRmob.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabConfig.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -1510,7 +1608,6 @@ namespace MeteorWatch
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Label lblPreviewedMonth;
-        private System.Windows.Forms.MonthCalendar monthCalendar2;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnUpdateTopMeteorCount;
         private System.Windows.Forms.TabControl tabMain;
@@ -1546,8 +1643,8 @@ namespace MeteorWatch
         private System.Windows.Forms.Button btnNextLog;
         private System.Windows.Forms.Button btnCopyScreenshot;
         private System.Windows.Forms.Label lblLogScroll;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblCategories;
+        private System.Windows.Forms.Label lblTimeUnit;
         private System.Windows.Forms.CheckBox checkShowFreq;
         private System.Windows.Forms.CheckBox checkShowNoise;
         private System.Windows.Forms.CheckBox checkShowSignal;
@@ -1558,14 +1655,23 @@ namespace MeteorWatch
         private System.Windows.Forms.TextBox txtScreenshotsDelay;
         private System.Windows.Forms.Label lblScreenshotsDelay;
         private System.Windows.Forms.TextBox txtLogIndex;
-        private System.Windows.Forms.Button btnGo;
         private System.Windows.Forms.Button btnSaveProgress;
-        private System.Windows.Forms.TextBox txtWhatIf;
         private System.Windows.Forms.CheckBox checkDropHistory;
         private System.Windows.Forms.CheckBox checkGenerateRMOB;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txtWhatIf;
         private System.Windows.Forms.RadioButton radioColourByRandom;
         private System.Windows.Forms.RadioButton radioColourByMonth;
         private System.Windows.Forms.RadioButton radioColourByYear;
+        private System.Windows.Forms.Label lblNormalise;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton radioRmobMonth;
+        private System.Windows.Forms.RadioButton radioRmobYear;
+        private System.Windows.Forms.RadioButton radioRmobAll;
+        private System.Windows.Forms.Label lblRecreateRmob;
+        private System.Windows.Forms.Button btnRecreateRmob;
+        private System.Windows.Forms.Button btnNormalise;
     }
 }
 

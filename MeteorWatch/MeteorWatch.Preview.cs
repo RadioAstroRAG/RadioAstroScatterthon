@@ -15,37 +15,6 @@ namespace MeteorWatch
     {
         #region Events
 
-        private void radioColourByMonth_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioColourByMonth.Checked)
-            {
-                RedrawPreview(GetRmobDate());
-            }
-        }
-
-        private void radioColourByYear_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioColourByYear.Checked)
-            {
-                RedrawPreview(GetRmobDate());
-            }
-        }
-
-        private void radioColourByRandom_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioColourByRandom.Checked)
-            {               
-                if (string.IsNullOrEmpty(txtWhatIf.Text))
-                {
-                    MessageBox.Show(invalidTopCountMessage);
-                    return;
-                }
-
-                RedrawPreview(currentRmobDate);
-            }
-        }
-
-
         private void btnImportColorgram_Click(object sender, EventArgs e)
         {
             DisplayRmobDataFromFile();
@@ -53,7 +22,7 @@ namespace MeteorWatch
 
         #endregion
 
-        private DateTime GetRmobDate()
+        private DateTime GetRmobDateFromCurrentLogFile()
         {
             if (currentRmobDate == null)
             {
@@ -63,6 +32,12 @@ namespace MeteorWatch
             }
             return currentRmobDate;
         }
+
+        private DateTime GetRmobDateFromCurrentOperation()
+        {
+            return currentVirtualRmobDate;
+        }
+
         private void LoadPreviewDataGrid()
         {
             List<DateTime> timestamps = GetTimestampsToView();
@@ -311,12 +286,10 @@ namespace MeteorWatch
 
         private void BlackOutDataGrid(DateTime monthAndYear)
         {
-            int daysInMonth = DateTime.DaysInMonth(monthAndYear.Year, monthAndYear.Month);
-
-            dataGridView1.GridColor = Color.DarkGray;
+             dataGridView1.GridColor = Color.DarkGray;
 
             // Prepare the background black...
-            for (int i = 0; i < daysInMonth; i++)
+            for (int i = 0; i < 31; i++)
             {
                 for (int j = 0; j < 24; j++)
                 {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogComponent;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
@@ -11,31 +12,40 @@ namespace MeteorWatch
 {
     partial class Scatterthon
     {
-        private bool whatIfPreview = false;
-
         #region Button click events... 
-
-        private void btnAddToCalendar_Click(object sender, EventArgs e)
+        
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
-            AddCleansedDataToRmobFile();
-
+            string rmobFileName = "";
+            currentVirtualRmobDate = dateTimePicker2.Value;
+            MakeRmobFileName(true, out rmobFileName);
+            LoadRmobFile(rmobFileName);
+            RedrawPreview(currentVirtualRmobDate);
         }
 
-        private string MakeRmobFileName(out string fileName)
+        private string MakeRmobFileName(bool useVirtual, out string fileName)
         {
             string dateStamp = string.Empty;
 
-            if (currentLogDate == DateTime.MinValue)
+            if (!useVirtual && currentLogDate == DateTime.MinValue)
             {
                 dateStamp = string.Format("{0:MMM}_{1}", currentRmobDate, currentRmobDate.Year);
             }
             else 
             {
-                if (currentLogDate == DateTime.MinValue)
+                // If we are regenerating rmob files automatically right now...
+                if (useVirtual)
                 {
-                    GetCurrentLogDate(currentLogFileName, out currentLogDate);
+                    dateStamp = string.Format("{0:MMM}_{1}", currentVirtualRmobDate, currentVirtualRmobDate.Year);
                 }
-                dateStamp = string.Format("{0:MMM}_{1}", currentLogDate, currentLogDate.Year);
+                else // We are just stepping along through log files manually, one at a time...
+                {
+                    if (currentLogDate == DateTime.MinValue)
+                    {
+                        GetCurrentLogDate(currentLogFileName, out currentLogDate);
+                    }
+                    dateStamp = string.Format("{0:MMM}_{1}", currentLogDate, currentLogDate.Year);
+                }
             }
             
             fileName = Path.Combine(config.RmobFilesDirectory, string.Format("rmob_{0}.txt", dateStamp));
@@ -50,16 +60,16 @@ namespace MeteorWatch
                 MessageBox.Show("There is no content to export..", "Not enough data");
                 return;
             }
-            string newFileName = SaveRmobFile();
+            string newFileName = SaveRmobFile(false);
 
             MessageBox.Show(string.Format("RMOB file saved as {0}...", newFileName), "File Saved as...");
         }
 
-        private string SaveRmobFile()
+        private string SaveRmobFile(bool automaticMode)
         {
             string dateStamp, newFileName;
 
-            dateStamp = MakeRmobFileName(out newFileName);
+            dateStamp = MakeRmobFileName(automaticMode, out newFileName);
 
             string allText = this.rmobFiles[dateStamp].MakeFile();
 
@@ -69,68 +79,68 @@ namespace MeteorWatch
         #endregion
 
         #region Helpers...
-        private void BoldenCleansedLogDate()
-        {
-            DateTime[] datesSoFar = monthCalendar2.BoldedDates;
+        //private void BoldenCleansedLogDate()
+        //{
+        //    DateTime[] datesSoFar = monthCalendar2.BoldedDates;
 
-            int requiredLength = datesSoFar.Length + 1;
-            Array.Resize(ref datesSoFar, requiredLength);
-            datesSoFar[requiredLength - 1] = currentLogDate;
+        //    int requiredLength = datesSoFar.Length + 1;
+        //    Array.Resize(ref datesSoFar, requiredLength);
+        //    datesSoFar[requiredLength - 1] = currentLogDate;
 
-            monthCalendar2.BoldedDates = datesSoFar;
-        }
+        //    monthCalendar2.BoldedDates = datesSoFar;
+        //}
         
-        private void AddCleansedDataToRmobFile()
+        private void AddCleansedDataToRmobFile(DateTime rmobDate)
         {
-            string monthStamp = string.Format("{0:MMM}_{1}", currentLogDate, currentLogDate.Year);
+            string monthStamp = string.Format("{0:MMM}_{1}", rmobDate, rmobDate.Year);
 
             if (!rmobFiles.ContainsKey(monthStamp))
             {
-                rmobFiles.Add(monthStamp, new RmobFile(currentLogDate));
+                rmobFiles.Add(monthStamp, new RmobFile(rmobDate));
             }
 
-            rmobFiles[monthStamp].SetDataForDay(currentLogDate, colorgram[currentLogDate]);
+            rmobFiles[monthStamp].SetDataForDay(rmobDate, colorgram[rmobDate]);
 
-            BoldenCleansedLogDate();
+            // BoldenCleansedLogDate();
         }
 
-        private void AddBoldDatesForExistingCleansedFiles()
-        {
-            try
-            {
-                // Check for files in the specified directory.
-                string cleansedDirectory = config.UpdatedLogsDirectory;
+        //private void AddBoldDatesForExistingCleansedFiles()
+        //{
+        //    try
+        //    {
+        //        // Check for files in the specified directory.
+        //        string cleansedDirectory = config.UpdatedLogsDirectory;
 
-                if (Directory.Exists(cleansedDirectory))
-                {
-                    string[] files = Directory.GetFiles(cleansedDirectory, "updated_event_log20*.txt");
+        //        if (Directory.Exists(cleansedDirectory))
+        //        {
+        //            string[] files = Directory.GetFiles(cleansedDirectory, "updated_event_log20*.txt");
 
-                    DateTime[] cleansedDatesArray = monthCalendar2.BoldedDates;
-                    Array.Resize(ref cleansedDatesArray, files.Length);
+        //            DateTime[] cleansedDatesArray = monthCalendar2.BoldedDates;
+        //            Array.Resize(ref cleansedDatesArray, files.Length);
 
-                    for (int fileIndex = 0; fileIndex < files.Length; fileIndex++)
-                    {
-                        string fileName = Path.GetFileName(files[fileIndex]);
+        //            for (int fileIndex = 0; fileIndex < files.Length; fileIndex++)
+        //            {
+        //                string fileName = Path.GetFileName(files[fileIndex]);
 
-                        GroupCollection groups = Regex.Match(fileName, @"(?<timestamp>\d{8}?).txt").Groups;
+        //                GroupCollection groups = Regex.Match(fileName, @"(?<timestamp>\d{8}?).txt").Groups;
 
-                        DateTime timePart = DateTime.ParseExact(groups["timestamp"].Value.ToString(),
-                            "yyyyMMdd", CultureInfo.CurrentCulture);
+        //                DateTime timePart = DateTime.ParseExact(groups["timestamp"].Value.ToString(),
+        //                    "yyyyMMdd", CultureInfo.CurrentCulture);
 
-                        cleansedDatesArray[fileIndex] = timePart;
+        //                cleansedDatesArray[fileIndex] = timePart;
 
-                        //string dateString = fileName.Substring(17, 8);
+        //                //string dateString = fileName.Substring(17, 8);
 
-                        // Parse it to extract the date..
-                        //DateTime cleansedDate = DateTime.ParseExact(dateString, "yyyyMMdd", CultureInfo.CurrentCulture);
-                        //cleansedDatesArray[fileIndex] = cleansedDate;
-                    }
+        //                // Parse it to extract the date..
+        //                //DateTime cleansedDate = DateTime.ParseExact(dateString, "yyyyMMdd", CultureInfo.CurrentCulture);
+        //                //cleansedDatesArray[fileIndex] = cleansedDate;
+        //            }
 
-                    monthCalendar2.BoldedDates = cleansedDatesArray;
-                }
-            }
-            catch { }
-        }
+        //            monthCalendar2.BoldedDates = cleansedDatesArray;
+        //        }
+        //    }
+        //    catch { }
+        //}
         #endregion
 
         private bool GetRmobData(string tempFile, out DateTime monthAndYear, out Dictionary<DateTime, Dictionary<int, int>> hoursAndCounts)
@@ -221,7 +231,7 @@ namespace MeteorWatch
             List<Color> colorList = ProcessHighestCountValue(monthAndYear);
 
             if (colorList != null)
-            {
+            {              
                 DrawGridMulticolorScales();
 
                 AddColorgramDaysToMonthPreview(monthAndYear, colorList);
@@ -277,7 +287,7 @@ namespace MeteorWatch
                         {
                             dataGridView1.Rows[hourlyCount.Key].Cells[adjustedDate].Style.BackColor = colorList[0];
                         }
-                        else if (count == -1) //|| hourlyCount.Key
+                        else if (count == -1)
                         {
                             dataGridView1.Rows[hourlyCount.Key].Cells[adjustedDate].Style.BackColor = Color.Black;
                         }
@@ -296,19 +306,132 @@ namespace MeteorWatch
 
         private void txtWhatIf_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Only respond to numeric input or Enter key...
+            // Only respond to numeric input...
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
-
-            if (e.KeyChar == (char)Keys.Return)
+        }
+        
+        private void btnNormalise_Click(object sender, EventArgs e)
+        {
+            if (radioColourByRandom.Checked)
             {
-                e.Handled = true;
-                radioColourByRandom_CheckedChanged(radioColourByRandom, null);
+                if (string.IsNullOrEmpty(txtWhatIf.Text))
+                {
+                    MessageBox.Show(invalidTopCountMessage);
+                    return;
+                }
             }
+            RedrawPreview(GetRmobDateFromCurrentLogFile());
         }
 
+        private void btnRecreateRmob_Click(object sender, EventArgs e)
+        {
+            DirectoryInfo rmobFolder = new DirectoryInfo(config.RmobFilesDirectory);
+            bool newFolder = false;
 
+            if (!rmobFolder.Exists)
+            {
+                rmobFolder.Create();
+                newFolder = true;
+            }
+
+            if (!newFolder)
+            {
+                IssueWarningsAndDeleteRmob(rmobFolder);
+            }
+
+            DirectoryInfo basicFiles = new DirectoryInfo(config.UpdatedLogsDirectory);
+
+            string fileNameFilter = GetFileNameFilter();
+
+            FileInfo[] fi = basicFiles.GetFiles(fileNameFilter);
+
+            foreach(FileInfo file in fi)
+            {
+                string[] fileContent = File.ReadAllLines(file.FullName);
+
+                ProcessRmobFileData(fileContent, file.Name, true);
+
+                SaveRmobFile(true);
+            }
+            RedrawPreview(dateTimePicker2.Value);
+        }
+
+        private string GetFileNameFilter()
+        {
+            string fileNameFilter = string.Empty;
+
+            if (radioRmobAll.Checked)
+            {
+                fileNameFilter = "event_log*_saved.txt";
+            }
+            else
+            {
+                string month = dateTimePicker2.Value.ToString("MM");
+                string year = dateTimePicker2.Value.ToString("yyyy");
+
+                if (radioRmobYear.Checked)
+                {
+                    fileNameFilter = string.Format("event_log{0}*_saved.txt", year);
+                }
+                else if (radioRmobMonth.Checked)
+                {
+                    fileNameFilter = string.Format("event_log{0}{1}*_saved.txt", year, month);
+                }
+            }
+            return fileNameFilter;
+        }
+
+        private void IssueWarningsAndDeleteRmob(DirectoryInfo rmobFolder)
+        {
+            if (radioRmobAll.Checked)
+            {
+                DialogResult res = MessageBox.Show("All RMOB files for this station will be deleted. Do you wish to continue?", "Warning", MessageBoxButtons.YesNo);
+
+                if (res == DialogResult.Yes)
+                {
+                    // Delete all RMOB files...
+                    foreach (FileInfo fi in rmobFolder.GetFiles())
+                    {
+                        fi.Delete();
+                    }
+                }
+            }
+            else if (radioRmobMonth.Checked)
+            {
+                // Select all files matching the selected month and year...
+                string month = dateTimePicker2.Value.ToString("MMM");
+                string year = dateTimePicker2.Value.ToString("yyyy");
+
+                DialogResult res = MessageBox.Show(string.Format("RMOB files for {0} {1} for this station will be deleted. Do you wish to continue?", month, year), "Warning", MessageBoxButtons.YesNo);
+
+                if (res == DialogResult.Yes)
+                {
+                    // Delete the RMOB file for this month...
+                    foreach (FileInfo fi in rmobFolder.GetFiles(string.Format("rmob_{0}_{1}.txt", month, year)))
+                    {
+                        fi.Delete();
+                    }
+                }
+            }
+            else if (radioRmobYear.Checked)
+            {
+                // Select all files matching selected year...
+                string year = dateTimePicker2.Value.Year.ToString();
+
+                DialogResult res = MessageBox.Show(string.Format("{0} RMOB file for this station will be deleted. Do you wish to continue?", year), "Warning", MessageBoxButtons.YesNo);
+
+                if (res == DialogResult.Yes)
+                {
+                    // Delete the RMOB file for this year...
+                    foreach (FileInfo fi in rmobFolder.GetFiles(string.Format("rmob_*_{0}.txt", year)))
+                    {
+                        fi.Delete();
+                    }
+                }
+            }
+        }
     }
 }

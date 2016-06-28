@@ -18,27 +18,6 @@ namespace MeteorWatch
     {
         bool doNotShowMissingImageWarning = false;
 
-        #region Navigation button click events...
-
-        private void UpdateCalendarCurrentDate()
-        {
-            if (GetCurrentLogDate(lblLogName.Text, out currentLogDate))
-            {
-                if (currentLogDate <= DateTime.Now)
-                {
-                    monthCalendar2.TodayDate = currentLogDate;
-                }
-
-                monthCalendar2.TitleBackColor = System.Drawing.Color.Blue;
-                monthCalendar2.TrailingForeColor = System.Drawing.Color.Red;
-                monthCalendar2.TitleForeColor = System.Drawing.Color.Yellow;
-            }
-        }
-
-        #endregion
-
-        #region Action button click events...
-
         private void btnCopyScreenshot_Click(object sender, EventArgs e)
         {
             if (lblScreenshotName.Text.StartsWith("SCREENSHOT"))
@@ -59,26 +38,48 @@ namespace MeteorWatch
             DisplayHighResolutionThumbnails();
         }
 
-        private void ProcessRmobFileData(string[] logViewerContent)
+        private void ProcessRmobFileData(string[] logViewerContent, string logFileName, bool useVirtualRmobDate)
         {
             Dictionary<int, int> currentDatesValues = SumUpTimePeriods(logViewerContent);
 
-            // Add the dictionary to our colorgram.
-            // Char count of "event_log" is 9.
-            if (GetCurrentLogDate(lblLogName.Text, out currentLogDate))
+            bool addVisuals = false;
+            DateTime rmobDate = new DateTime();
+
+            // Are we called from navigation's "Next" button click in "Cleanse" tab, or from "recreate" options in RMOB tab?
+            // If logFileName the same as the label, then it's the former...
+            if (!useVirtualRmobDate && GetCurrentLogDate(logFileName, out currentLogDate))
             {
-                if (colorgram.ContainsKey(currentLogDate))
-                {
-                    colorgram.Remove(currentLogDate);
-                }
+                // Set current log date member along the way...
+                rmobDate = currentLogDate;
+                addVisuals = true;
+            }
+            else if (GetCurrentLogDate(logFileName, out currentVirtualRmobDate))
+            {
+                rmobDate = currentVirtualRmobDate;
+                addVisuals = false;
+            }
+            else
+            {
+                MessageBox.Show(string.Format("Could not process file name {0}", logFileName), "Error...");
+                return;
+            }
 
-                colorgram.Add(currentLogDate, currentDatesValues);
+            if (colorgram.ContainsKey(rmobDate))
+            {
+                colorgram.Remove(rmobDate);
+            }
 
+            // Add the dictionary to our colorgram.
+            // Char count of "event_log" is 9.            
+            colorgram.Add(rmobDate, currentDatesValues);
+
+            if (addVisuals)
+            {
                 // TODO: add this date to the colourgram preview...
                 AddCleansedDataToRmobPreview();
-
-                AddCleansedDataToRmobFile();
             }
+
+            AddCleansedDataToRmobFile(rmobDate);
         }
 
         private int FindHighestCountThisMonth(DateTime dt)
@@ -99,8 +100,6 @@ namespace MeteorWatch
             }
             return highestSoFar;
         }
-
-        #endregion
 
         #region Log file helpers...
 
@@ -171,7 +170,7 @@ namespace MeteorWatch
                 {
                     string rmobFileToLoad;
 
-                    MakeRmobFileName(out rmobFileToLoad);
+                    MakeRmobFileName(false, out rmobFileToLoad);
 
                     LoadRmobFile(rmobFileToLoad);
                 }
@@ -254,27 +253,23 @@ namespace MeteorWatch
         private Dictionary<int, int> SumUpTimePeriods(string[] processedLogLines)
         {
             // Will contain hour/sequence pairs...
-            Dictionary<int, KeyValuePair<int, bool>> currentDatesValues = new Dictionary<int, KeyValuePair<int, bool>>();
-            int hour = 0;
-            int lastHour = -1;
-
+            Dictionary<int, int> currentDatesValues = new Dictionary<int, int>();
             string id = "";
-            string lastID = "";
+            int hour = -1;           
             int mainID = 0;
-                          
-            int occurencesInHour = 0;
-            DateTime timestamp = new DateTime();
-
-            int firstHourOnRecord = SetFirstHourOnRecord(processedLogLines[0]);
-            bool rolledOver = false;
-            bool rolledOverCounted = false;
+            int nextHour = 0;                          
+            int occurencesInHour = 0;            
             int numberOfSplitRecords = 0;
             int wrongClassEvents = 0;
 
+            DateTime timestamp = new DateTime();
+
             string currentClass = string.Empty;
-            
-            foreach (string line in processedLogLines)
+
+            for (int i = 0; i < processedLogLines.Length; i++ )
             {
+                string line = processedLogLines[i];
+
                 // Break up each line into a string array, then get
                 // index 0 for [hour] and index 1 for [id] from 14:16:18,12,-93.4,-112.9,2335.8,2...
                 if (line.Contains(','))
@@ -307,56 +302,35 @@ namespace MeteorWatch
                             // See if this count overflows from the previous hour (due to 30 second delay)...
                             timestamp = DateTime.ParseExact(lineParts[0], "HH:mm:ss", CultureInfo.CurrentCulture);
 
-                            // Only increments if we had a valid timestamp.
+                            if (hour == -1) { hour = timestamp.Hour; }
+
                             occurencesInHour++;
-
-                            if (rolledOver)
-                            {
-                                rolledOverCounted = true;
-                            }
-
-                            rolledOver = false;
-
-                            // There is a chance we've overflown, is the count low enough for that?
-                            // Assumption: count always begins at 2.   
 
                             string idForParsing = (id.Contains(".") ? (id.Substring(0, id.Length - id.IndexOf(".") - 1)) : id);
 
                             int.TryParse(idForParsing, out mainID);
 
-                            if (timestamp.Minute == 59 && mainID < 3)
+                            if (i < processedLogLines.Length - 1)
                             {
-                                rolledOver = true;
-                                // Carry this counter as the first one of the next hour,
-                                // unless the hour is 23 already...
-                                if (hour != 23 && !id.Contains("."))
-                                {
-                                    hour = timestamp.AddHours(1).Hour;
-                                }
-                                else
-                                {
-                                    // Preserve the previous id as last ID and hour count...
-                                    continue;
-                                }
-                            }
-                            else
-                            {
-                                // Just roll on current hour.
-                                hour = timestamp.Hour;
+                                nextHour = GetNextHour(processedLogLines[i + 1], hour);
                             }
 
-                            lastID = (lastID.Contains(".") ? (lastID.Substring(0, lastID.IndexOf("."))) : lastID);
-
-                            occurencesInHour = TotalUpLastHour(currentDatesValues, lastHour, mainID, lastID, numberOfSplitRecords, occurencesInHour, timestamp, firstHourOnRecord, rolledOver, rolledOverCounted, wrongClassEvents);
-
-                            // Take note of the id and hour...
-                            if ((lastHour != hour || lastID != id) && occurencesInHour == 1)
+                            if (hour == 23)
                             {
+                                // Preserve the previous id as last ID and hour count...
+                                continue;
+                            }
+
+                            if (nextHour != hour)
+                            {
+                                TotalUpLastHour(currentDatesValues, timestamp.Hour, mainID, numberOfSplitRecords, occurencesInHour, wrongClassEvents);
+                                
+                                // Reset...
+                                occurencesInHour = 0;
                                 numberOfSplitRecords = 0;
                                 wrongClassEvents = 0;
+                                hour = nextHour;
                             }
-                            lastID = id;
-                            lastHour = hour;
                         }
                         catch
                         {
@@ -369,91 +343,50 @@ namespace MeteorWatch
             // Take care of the last hour's data.
             if ((mainID + numberOfSplitRecords) >= occurencesInHour)
             {
-                currentDatesValues.Add(lastHour, new KeyValuePair<int, bool>(occurencesInHour - wrongClassEvents, rolledOverCounted));
+                currentDatesValues.Add(hour, occurencesInHour - wrongClassEvents);
             }
 
-            // Convert to a cut-down version of the dictionary...
-            Dictionary<int, int> returnCollection = new Dictionary<int, int>();
-
-            foreach (KeyValuePair<int, KeyValuePair<int, bool>> pairToCutDown in currentDatesValues)
-            {
-                returnCollection.Add(pairToCutDown.Key, pairToCutDown.Value.Key);
-            }
-            return returnCollection;
+            return currentDatesValues;
         }
 
-        private int SetFirstHourOnRecord(string line)
+        private static int GetNextHour(string line, int currentHour)
         {
-            int hour = 0, id = 0;
-
-            string[] lineParts = line.Split(',');
-
-            if (lineParts.Length > 2)
+            if (!line.Contains(','))
             {
-                try
-                {
-                    // Get the meteor counter...
-                    int.TryParse(lineParts[1], out id);
-
-                    // See if this count overflows from the previous hour (due to 30 second delay)...
-                    DateTime timestamp = DateTime.ParseExact(lineParts[0], "HH:mm:ss", CultureInfo.CurrentCulture);
-                    hour = timestamp.Hour;
-
-                    // There is a chance we've overflown, is the count low enough for that?
-                    // Assumption: count always begins at 2.                        
-                    if (timestamp.Minute == 59 && id < 3)
-                    {
-                        // Carry this counter as the first one of the next hour,
-                        // unless the hour is 23 already...
-                        if (hour != 23)
-                        {
-                            hour = timestamp.AddHours(1).Hour;
-                        }
-                    }
-                }
-                catch
-                {
-                    MessageBox.Show("There is a problem determining the first hour on record...", "Contact the dev team");
-                }
+                return currentHour;
             }
-            return hour;
+
+            string[] partsOfLine = line.Split(',');
+
+            DateTime time = new DateTime(1, 1, 1, currentHour, 0, 0);
+
+            if (partsOfLine.Length > 0)
+            {
+                time = DateTime.ParseExact(partsOfLine[0], "HH:mm:ss", CultureInfo.CurrentCulture);
+            }
+            // If the parsing failed, return current hour...
+            return time.Hour;
         }
 
-        private static int TotalUpLastHour(Dictionary<int, KeyValuePair<int, bool>> currentDatesValues, int lastHour, int lastID, string lastStrID, int numberOfSplits, int occurencesInHour, DateTime timestamp, int firstHourOnRecord, bool rolledOver, bool rolledOverCounted, int eventsToRemove)
+        private static void TotalUpLastHour(Dictionary<int, int> currentDatesValues, int lastHour, int lastID, int numberOfSplits, int occurencesInHour, int eventsToRemove)
         {
-            // We are rounding off the count for the previous hour.
-            if ((lastHour != timestamp.Hour && lastHour > -1) || rolledOver)
-            {
-                #region Comment
-                // See if the number of meteor records matches the logged ids.
-                // The two should be the same if there was no interruption in logging.
-                // OR lastID will be higher if there was a manual line removal 
-                // (such as a false positive recognised on a screenshot).
-                #endregion
+            #region Comment
+            // See if the number of meteor records matches the logged ids.
+            // The two should be the same if there was no interruption in logging.
+            // OR lastID will be higher if there was a manual line removal 
+            // (such as a false positive recognised on a screenshot).
+            #endregion
                 
-                //if (lastID >= occurencesInHour || ((lastHour == firstHourOnRecord) && (lastID == (occurencesInHour - 1))))
-                if (rolledOver && lastHour == -1)
-                {
-                    // This has been left behind from the previous "clean"..
-                }
-                else if ((int.Parse(lastStrID) + numberOfSplits) >= (occurencesInHour - 1))
-                {
-                    // This period is NOT corrupt, add it to our data.
-                    // Reduce occurrences by 1, since 1 meteor is ALWAYS logged on start up falsely.
-
-                    KeyValuePair<int, bool> valuePair = new KeyValuePair<int, bool>(occurencesInHour - eventsToRemove - 1, rolledOverCounted);
-
-                    currentDatesValues.Add(lastHour, valuePair); 
-                }
-                else
-                {
-                    KeyValuePair<int, bool> valuePair = new KeyValuePair<int, bool>(-1, rolledOverCounted);
-
-                    currentDatesValues.Add(lastHour, valuePair);
-                }
-                occurencesInHour = 1;
+            if ((lastID + numberOfSplits) >= (occurencesInHour))
+            {
+                // This period is NOT corrupt, add it to our data.
+                currentDatesValues.Add(lastHour, occurencesInHour - eventsToRemove); 
             }
-            return occurencesInHour;
+            else
+            {
+                // This period must have had discontinuously logged data...
+                currentDatesValues.Add(lastHour, -1);
+            }
         }
 
         #endregion

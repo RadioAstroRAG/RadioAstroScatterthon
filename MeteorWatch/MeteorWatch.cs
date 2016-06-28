@@ -59,6 +59,7 @@ namespace MeteorWatch
         
         DateTime currentLogDate = new DateTime();
         DateTime currentRmobDate = new DateTime();
+        DateTime currentVirtualRmobDate = new DateTime();
 
         // Maps month and year (as a string) to the RMOB file...
         Dictionary<string, RmobFile> rmobFiles = new Dictionary<string, RmobFile>();
@@ -89,8 +90,8 @@ namespace MeteorWatch
                        
           
             // Initialise calendar...
-            AddBoldDatesForExistingCleansedFiles();
-            monthCalendar2.MaxDate = DateTime.Now;
+            //AddBoldDatesForExistingCleansedFiles();
+            //monthCalendar2.MaxDate = DateTime.Now;
 
             standardRange[0] = Color.FromArgb(0, 64, 255);
             standardRange[1] = Color.FromArgb(2, 193, 252);
@@ -267,8 +268,6 @@ namespace MeteorWatch
             dataGridView1.Rows[23].Cells[33].Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 
             List<Color> colorList = PrepareListOfMultiColours(maxThisMonth);
-                        
-            // dataGridView1.Rows[hour].Cells[day].Style.BackColor = Color.Red
 
             // Prepare the background black...
             for (int i = 0; i < DateTime.Now.Month; i++)
@@ -366,12 +365,12 @@ namespace MeteorWatch
 
                 SaveTimeStamps(fileContent);
 
-                fileContent = logFileComponent.LogFileContentSortedByTime;
-
                 if (checkGenerateRMOB.Checked)
                 {
-                    ProcessRmobFileData(fileContent);
-                    SaveRmobFile();
+                    bool automaticallyDrivenSave = false;
+
+                    ProcessRmobFileData(fileContent, lblLogName.Text, automaticallyDrivenSave);
+                    SaveRmobFile(automaticallyDrivenSave);
                 }
 
                 // Update labels if necessary...
@@ -563,6 +562,7 @@ namespace MeteorWatch
                     {
                         GetCurrentLogDate(currentLogFileName, out currentLogDate);
                         RedrawPreview(currentLogDate);
+                        dateTimePicker2.Value = currentLogDate;
                     }
                     break;
 
@@ -587,12 +587,14 @@ namespace MeteorWatch
             {
                 e.Handled = true;
             }
-        }
 
-        private void btnGo_Click(object sender, EventArgs e)
-        {
-            ClearScreenshots();
-            SetCurrentLogIndex(null);
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                e.Handled = true;
+
+                ClearScreenshots();
+                SetCurrentLogIndex(null);
+            }
         }
 
         private void Scatterthon_FormClosing(object sender, FormClosingEventArgs e)
@@ -610,6 +612,5 @@ namespace MeteorWatch
                 e.Cancel = true;
             }
         }
-
     }
 }
