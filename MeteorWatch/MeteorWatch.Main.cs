@@ -230,7 +230,7 @@ namespace MeteorWatch
             int fileOrder = currentLogIndex + 1;
 
             // Display the log file position...
-            lblLogScroll.Text = string.Format("{0} [{1} of {2}]... {3}", currentLogFileName, fileOrder, totalLogFiles, screenshotName);
+            lblLogScroll.Text = string.Format("{0} [index {1} of {2}]... {3}", currentLogFileName, fileOrder, totalLogFiles, screenshotName);
         }
 
         private void LoadFirstLogFile()

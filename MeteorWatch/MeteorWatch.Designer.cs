@@ -34,7 +34,7 @@ namespace MeteorWatch
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Scatterthon));
             this.tabRmob = new System.Windows.Forms.TabPage();
             this.btnRecreateRmob = new System.Windows.Forms.Button();
@@ -159,6 +159,7 @@ namespace MeteorWatch
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutScatterthonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblLogIndexPrompt = new System.Windows.Forms.Label();
             this.tabRmob.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -389,14 +390,14 @@ namespace MeteorWatch
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -1082,8 +1083,7 @@ namespace MeteorWatch
             this.txtLogIndex.Name = "txtLogIndex";
             this.txtLogIndex.Size = new System.Drawing.Size(73, 20);
             this.txtLogIndex.TabIndex = 19;
-            this.toolTipSync.SetToolTip(this.txtLogIndex, "Enter the number of log file to go to. It needs to be from the range presented wi" +
-        "thin square brackets, e.g. [1 of 23]...");
+            this.toolTipSync.SetToolTip(this.txtLogIndex, "Enter the index of log file to go to, then press Enter on your keyboard.");
             this.txtLogIndex.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLogIndex_KeyPress);
             // 
             // btnImageScrollLeft
@@ -1160,6 +1160,7 @@ namespace MeteorWatch
             // innerSplitContainer.Panel2
             // 
             this.innerSplitContainer.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.innerSplitContainer.Panel2.Controls.Add(this.lblLogIndexPrompt);
             this.innerSplitContainer.Panel2.Controls.Add(this.btnSaveProgress);
             this.innerSplitContainer.Panel2.Controls.Add(this.txtLogIndex);
             this.innerSplitContainer.Panel2.Controls.Add(this.lblLogScroll);
@@ -1496,6 +1497,16 @@ namespace MeteorWatch
             this.aboutScatterthonToolStripMenuItem.Text = "About Scatterthon";
             this.aboutScatterthonToolStripMenuItem.Click += new System.EventHandler(this.aboutScatterthonToolStripMenuItem_Click);
             // 
+            // lblLogIndexPrompt
+            // 
+            this.lblLogIndexPrompt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLogIndexPrompt.AutoSize = true;
+            this.lblLogIndexPrompt.Location = new System.Drawing.Point(266, 634);
+            this.lblLogIndexPrompt.Name = "lblLogIndexPrompt";
+            this.lblLogIndexPrompt.Size = new System.Drawing.Size(152, 13);
+            this.lblLogIndexPrompt.TabIndex = 23;
+            this.lblLogIndexPrompt.Text = "Go directly to log file at index #";
+            // 
             // Scatterthon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1672,6 +1683,7 @@ namespace MeteorWatch
         private System.Windows.Forms.Label lblRecreateRmob;
         private System.Windows.Forms.Button btnRecreateRmob;
         private System.Windows.Forms.Button btnNormalise;
+        private System.Windows.Forms.Label lblLogIndexPrompt;
     }
 }
 
