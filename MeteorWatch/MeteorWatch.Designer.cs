@@ -34,7 +34,7 @@ namespace MeteorWatch
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Scatterthon));
             this.tabRmob = new System.Windows.Forms.TabPage();
             this.btnRecreateRmob = new System.Windows.Forms.Button();
@@ -135,6 +135,7 @@ namespace MeteorWatch
             this.innerSplitContainer = new System.Windows.Forms.SplitContainer();
             this.logFileComponent = new LogComponent.LogFileViewer();
             this.lblLogName = new System.Windows.Forms.Label();
+            this.lblLogIndexPrompt = new System.Windows.Forms.Label();
             this.lblLogScroll = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.picBoxScreenshot = new System.Windows.Forms.PictureBox();
@@ -159,7 +160,6 @@ namespace MeteorWatch
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutScatterthonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblLogIndexPrompt = new System.Windows.Forms.Label();
             this.tabRmob.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -390,14 +390,14 @@ namespace MeteorWatch
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -786,7 +786,6 @@ namespace MeteorWatch
             // 
             // checkDropHistory
             // 
-            this.checkDropHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkDropHistory.AutoSize = true;
             this.checkDropHistory.Checked = true;
             this.checkDropHistory.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -801,7 +800,6 @@ namespace MeteorWatch
             // 
             // checkGenerateRMOB
             // 
-            this.checkGenerateRMOB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkGenerateRMOB.AutoSize = true;
             this.checkGenerateRMOB.Checked = true;
             this.checkGenerateRMOB.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1198,6 +1196,16 @@ namespace MeteorWatch
             this.lblLogName.Text = "LOG: Double-click \'Original log files directory\' in Config tab to set logs\' folde" +
     "r...";
             // 
+            // lblLogIndexPrompt
+            // 
+            this.lblLogIndexPrompt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLogIndexPrompt.AutoSize = true;
+            this.lblLogIndexPrompt.Location = new System.Drawing.Point(266, 634);
+            this.lblLogIndexPrompt.Name = "lblLogIndexPrompt";
+            this.lblLogIndexPrompt.Size = new System.Drawing.Size(152, 13);
+            this.lblLogIndexPrompt.TabIndex = 23;
+            this.lblLogIndexPrompt.Text = "Go directly to log file at index #";
+            // 
             // lblLogScroll
             // 
             this.lblLogScroll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -1496,16 +1504,6 @@ namespace MeteorWatch
             this.aboutScatterthonToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.aboutScatterthonToolStripMenuItem.Text = "About Scatterthon";
             this.aboutScatterthonToolStripMenuItem.Click += new System.EventHandler(this.aboutScatterthonToolStripMenuItem_Click);
-            // 
-            // lblLogIndexPrompt
-            // 
-            this.lblLogIndexPrompt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblLogIndexPrompt.AutoSize = true;
-            this.lblLogIndexPrompt.Location = new System.Drawing.Point(266, 634);
-            this.lblLogIndexPrompt.Name = "lblLogIndexPrompt";
-            this.lblLogIndexPrompt.Size = new System.Drawing.Size(152, 13);
-            this.lblLogIndexPrompt.TabIndex = 23;
-            this.lblLogIndexPrompt.Text = "Go directly to log file at index #";
             // 
             // Scatterthon
             // 
