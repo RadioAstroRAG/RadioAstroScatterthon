@@ -41,11 +41,15 @@ using System.Runtime.InteropServices;
 
 /// Change history
 ///  
+//
+// 1.5.0.0 - 10/07/2016
+//
+// Filter tab added...
+//
 // 1.4.0.0 - 05/06/2016
 //
 // RMOB tab reworked to include more options and a more robust algorithm for counting events...
-//
-/// 
+// 
 // 1.3.4.27 - 11/02/2016
 //
 // RMOB view was broken after categories list was changed. No longer using indexes,

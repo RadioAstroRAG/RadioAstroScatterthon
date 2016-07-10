@@ -547,27 +547,28 @@ namespace MeteorWatch
 
         private void tabMain_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch ((sender as TabControl).SelectedTab.Text)
+            if (!string.IsNullOrEmpty(currentLogFileName))
             {
-                case "Preview":
-                    if (!string.IsNullOrEmpty(currentLogFileName))
-                    {
-                        GetCurrentLogDate(currentLogFileName, out currentLogDate);
+                GetCurrentLogDate(currentLogFileName, out currentLogDate);
+
+                switch ((sender as TabControl).SelectedTab.Text)
+                {
+                    case "Preview":                        
                         dateTimePicker1.Value = currentLogDate;
-                    }
-                    break;
+                        break;
 
-                case "RMOB":
-                    if (!string.IsNullOrEmpty(currentLogFileName))
-                    {
-                        GetCurrentLogDate(currentLogFileName, out currentLogDate);
+                    case "RMOB":
                         RedrawPreview(currentLogDate);
-                        dateTimePicker2.Value = currentLogDate;
-                    }
-                    break;
+                        dtpRMOB.Value = currentLogDate;
+                        break;
 
-                default:
-                    break;
+                    case "Filter":
+                        dtpFilter.Value = currentLogDate;
+                        break;
+
+                    default:
+                        break;
+                }
             }
         }
 

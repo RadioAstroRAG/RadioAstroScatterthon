@@ -34,7 +34,7 @@ namespace MeteorWatch
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Scatterthon));
             this.tabRmob = new System.Windows.Forms.TabPage();
             this.btnRecreateRmob = new System.Windows.Forms.Button();
@@ -50,7 +50,7 @@ namespace MeteorWatch
             this.radioColourByMonth = new System.Windows.Forms.RadioButton();
             this.radioColourByYear = new System.Windows.Forms.RadioButton();
             this.lblNormalise = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dtpRMOB = new System.Windows.Forms.DateTimePicker();
             this.btnExport = new System.Windows.Forms.Button();
             this.lblPreviewedMonth = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -92,6 +92,7 @@ namespace MeteorWatch
             this.tabConfig = new System.Windows.Forms.TabPage();
             this.btnSaveConfig = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblConfigNotSaved = new System.Windows.Forms.Label();
             this.checkDropHistory = new System.Windows.Forms.CheckBox();
             this.checkGenerateRMOB = new System.Windows.Forms.CheckBox();
             this.txtScreenshotsDelay = new System.Windows.Forms.TextBox();
@@ -157,6 +158,18 @@ namespace MeteorWatch
             this.TwentyFourHourGrid = new System.Windows.Forms.DataGridView();
             this.Column33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabAnnual = new System.Windows.Forms.TabPage();
+            this.tabFilter = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.checkedListClassesFilter = new System.Windows.Forms.CheckedListBox();
+            this.lblCategoriesFilter = new System.Windows.Forms.Label();
+            this.btnCoalesce = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.radioCoalesceMonth = new System.Windows.Forms.RadioButton();
+            this.radioCoalesceYear = new System.Windows.Forms.RadioButton();
+            this.radioCoalesceAll = new System.Windows.Forms.RadioButton();
+            this.lblCoalesceLogs = new System.Windows.Forms.Label();
+            this.dtpFilter = new System.Windows.Forms.DateTimePicker();
+            this.logFileViewerFilter = new LogComponent.LogFileViewer();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutScatterthonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -182,6 +195,9 @@ namespace MeteorWatch
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TwentyFourHourGrid)).BeginInit();
+            this.tabFilter.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -193,7 +209,7 @@ namespace MeteorWatch
             this.tabRmob.Controls.Add(this.lblRecreateRmob);
             this.tabRmob.Controls.Add(this.groupBox2);
             this.tabRmob.Controls.Add(this.lblNormalise);
-            this.tabRmob.Controls.Add(this.dateTimePicker2);
+            this.tabRmob.Controls.Add(this.dtpRMOB);
             this.tabRmob.Controls.Add(this.btnExport);
             this.tabRmob.Controls.Add(this.lblPreviewedMonth);
             this.tabRmob.Controls.Add(this.dataGridView1);
@@ -348,14 +364,14 @@ namespace MeteorWatch
             this.lblNormalise.TabIndex = 27;
             this.lblNormalise.Text = "Normalise Colourgramme for...";
             // 
-            // dateTimePicker2
+            // dtpRMOB
             // 
-            this.dateTimePicker2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(818, 23);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(151, 20);
-            this.dateTimePicker2.TabIndex = 26;
-            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
+            this.dtpRMOB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpRMOB.Location = new System.Drawing.Point(818, 23);
+            this.dtpRMOB.Name = "dtpRMOB";
+            this.dtpRMOB.Size = new System.Drawing.Size(151, 20);
+            this.dtpRMOB.TabIndex = 26;
+            this.dtpRMOB.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
             // btnExport
             // 
@@ -390,14 +406,14 @@ namespace MeteorWatch
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -756,6 +772,7 @@ namespace MeteorWatch
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.lblConfigNotSaved);
             this.panel1.Controls.Add(this.checkDropHistory);
             this.panel1.Controls.Add(this.checkGenerateRMOB);
             this.panel1.Controls.Add(this.txtScreenshotsDelay);
@@ -784,16 +801,26 @@ namespace MeteorWatch
             this.panel1.Size = new System.Drawing.Size(964, 610);
             this.panel1.TabIndex = 17;
             // 
+            // lblConfigNotSaved
+            // 
+            this.lblConfigNotSaved.AutoSize = true;
+            this.lblConfigNotSaved.Location = new System.Drawing.Point(37, 289);
+            this.lblConfigNotSaved.Name = "lblConfigNotSaved";
+            this.lblConfigNotSaved.Size = new System.Drawing.Size(382, 13);
+            this.lblConfigNotSaved.TabIndex = 38;
+            this.lblConfigNotSaved.Text = "Settings below are not station-specific and will not be saved in configuration fi" +
+    "le:";
+            // 
             // checkDropHistory
             // 
             this.checkDropHistory.AutoSize = true;
             this.checkDropHistory.Checked = true;
             this.checkDropHistory.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkDropHistory.Location = new System.Drawing.Point(216, 392);
+            this.checkDropHistory.Location = new System.Drawing.Point(216, 417);
             this.checkDropHistory.Name = "checkDropHistory";
-            this.checkDropHistory.Size = new System.Drawing.Size(113, 17);
+            this.checkDropHistory.Size = new System.Drawing.Size(244, 17);
             this.checkDropHistory.TabIndex = 37;
-            this.checkDropHistory.Text = "Drop Undo History";
+            this.checkDropHistory.Text = "Drop Undo History upon Browsing to Next Log";
             this.toolTipSync.SetToolTip(this.checkDropHistory, "Drop my Undo history on navigating to next log file. \r\nTicking this box will stop" +
         " Scatterthon taking up too much computer memory.");
             this.checkDropHistory.UseVisualStyleBackColor = true;
@@ -803,7 +830,7 @@ namespace MeteorWatch
             this.checkGenerateRMOB.AutoSize = true;
             this.checkGenerateRMOB.Checked = true;
             this.checkGenerateRMOB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkGenerateRMOB.Location = new System.Drawing.Point(216, 367);
+            this.checkGenerateRMOB.Location = new System.Drawing.Point(216, 392);
             this.checkGenerateRMOB.Name = "checkGenerateRMOB";
             this.checkGenerateRMOB.Size = new System.Drawing.Size(169, 17);
             this.checkGenerateRMOB.TabIndex = 36;
@@ -814,6 +841,8 @@ namespace MeteorWatch
             // 
             // txtScreenshotsDelay
             // 
+            this.txtScreenshotsDelay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtScreenshotsDelay.Location = new System.Drawing.Point(216, 183);
             this.txtScreenshotsDelay.Name = "txtScreenshotsDelay";
             this.txtScreenshotsDelay.Size = new System.Drawing.Size(681, 20);
@@ -831,6 +860,7 @@ namespace MeteorWatch
             // checkPagination
             // 
             this.checkPagination.AutoSize = true;
+            this.checkPagination.Enabled = false;
             this.checkPagination.Location = new System.Drawing.Point(805, 156);
             this.checkPagination.Name = "checkPagination";
             this.checkPagination.Size = new System.Drawing.Size(98, 17);
@@ -842,7 +872,7 @@ namespace MeteorWatch
             // checkShowFreq
             // 
             this.checkShowFreq.AutoSize = true;
-            this.checkShowFreq.Location = new System.Drawing.Point(216, 326);
+            this.checkShowFreq.Location = new System.Drawing.Point(216, 366);
             this.checkShowFreq.Name = "checkShowFreq";
             this.checkShowFreq.Size = new System.Drawing.Size(115, 17);
             this.checkShowFreq.TabIndex = 32;
@@ -852,7 +882,7 @@ namespace MeteorWatch
             // checkShowNoise
             // 
             this.checkShowNoise.AutoSize = true;
-            this.checkShowNoise.Location = new System.Drawing.Point(216, 302);
+            this.checkShowNoise.Location = new System.Drawing.Point(216, 342);
             this.checkShowNoise.Name = "checkShowNoise";
             this.checkShowNoise.Size = new System.Drawing.Size(121, 17);
             this.checkShowNoise.TabIndex = 31;
@@ -862,7 +892,7 @@ namespace MeteorWatch
             // checkShowSignal
             // 
             this.checkShowSignal.AutoSize = true;
-            this.checkShowSignal.Location = new System.Drawing.Point(216, 278);
+            this.checkShowSignal.Location = new System.Drawing.Point(216, 318);
             this.checkShowSignal.Name = "checkShowSignal";
             this.checkShowSignal.Size = new System.Drawing.Size(123, 17);
             this.checkShowSignal.TabIndex = 30;
@@ -1120,6 +1150,7 @@ namespace MeteorWatch
             this.tabMain.Controls.Add(this.tabRmob);
             this.tabMain.Controls.Add(this.tabAnnual);
             this.tabMain.Controls.Add(this.tabConfig);
+            this.tabMain.Controls.Add(this.tabFilter);
             this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabMain.Location = new System.Drawing.Point(0, 24);
             this.tabMain.Multiline = true;
@@ -1424,7 +1455,7 @@ namespace MeteorWatch
             "  Remove",
             "  Satellite",
             "  Query"});
-            this.checkedListClasses.Location = new System.Drawing.Point(16, 15);
+            this.checkedListClasses.Location = new System.Drawing.Point(11, 15);
             this.checkedListClasses.Margin = new System.Windows.Forms.Padding(30);
             this.checkedListClasses.Name = "checkedListClasses";
             this.checkedListClasses.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1479,6 +1510,148 @@ namespace MeteorWatch
             this.tabAnnual.TabIndex = 4;
             this.tabAnnual.Text = "Annual";
             this.tabAnnual.UseVisualStyleBackColor = true;
+            // 
+            // tabFilter
+            // 
+            this.tabFilter.Controls.Add(this.groupBox5);
+            this.tabFilter.Controls.Add(this.lblCategoriesFilter);
+            this.tabFilter.Controls.Add(this.btnCoalesce);
+            this.tabFilter.Controls.Add(this.groupBox4);
+            this.tabFilter.Controls.Add(this.lblCoalesceLogs);
+            this.tabFilter.Controls.Add(this.dtpFilter);
+            this.tabFilter.Controls.Add(this.logFileViewerFilter);
+            this.tabFilter.Location = new System.Drawing.Point(4, 4);
+            this.tabFilter.Name = "tabFilter";
+            this.tabFilter.Padding = new System.Windows.Forms.Padding(3);
+            this.tabFilter.Size = new System.Drawing.Size(993, 676);
+            this.tabFilter.TabIndex = 6;
+            this.tabFilter.Text = "Filter";
+            this.tabFilter.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.checkedListClassesFilter);
+            this.groupBox5.Location = new System.Drawing.Point(819, 204);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(151, 160);
+            this.groupBox5.TabIndex = 33;
+            this.groupBox5.TabStop = false;
+            // 
+            // checkedListClassesFilter
+            // 
+            this.checkedListClassesFilter.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.checkedListClassesFilter.FormattingEnabled = true;
+            this.checkedListClassesFilter.Items.AddRange(new object[] {
+            "  Aircraft",
+            "  Interference",
+            "  Meteor trail",
+            "  Moon bounce",
+            "  Head echo",
+            "  Remove",
+            "  Satellite",
+            "  Query"});
+            this.checkedListClassesFilter.Location = new System.Drawing.Point(10, 15);
+            this.checkedListClassesFilter.Margin = new System.Windows.Forms.Padding(30);
+            this.checkedListClassesFilter.Name = "checkedListClassesFilter";
+            this.checkedListClassesFilter.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.checkedListClassesFilter.Size = new System.Drawing.Size(125, 135);
+            this.checkedListClassesFilter.TabIndex = 12;
+            // 
+            // lblCategoriesFilter
+            // 
+            this.lblCategoriesFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCategoriesFilter.AutoSize = true;
+            this.lblCategoriesFilter.Location = new System.Drawing.Point(822, 190);
+            this.lblCategoriesFilter.Name = "lblCategoriesFilter";
+            this.lblCategoriesFilter.Size = new System.Drawing.Size(91, 13);
+            this.lblCategoriesFilter.TabIndex = 34;
+            this.lblCategoriesFilter.Text = "With Categories...";
+            // 
+            // btnCoalesce
+            // 
+            this.btnCoalesce.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCoalesce.Location = new System.Drawing.Point(895, 374);
+            this.btnCoalesce.Name = "btnCoalesce";
+            this.btnCoalesce.Size = new System.Drawing.Size(75, 23);
+            this.btnCoalesce.TabIndex = 32;
+            this.btnCoalesce.Text = "Go";
+            this.btnCoalesce.UseVisualStyleBackColor = true;
+            this.btnCoalesce.Click += new System.EventHandler(this.btnCoalesce_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.radioCoalesceMonth);
+            this.groupBox4.Controls.Add(this.radioCoalesceYear);
+            this.groupBox4.Controls.Add(this.radioCoalesceAll);
+            this.groupBox4.Location = new System.Drawing.Point(818, 78);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(151, 100);
+            this.groupBox4.TabIndex = 31;
+            this.groupBox4.TabStop = false;
+            // 
+            // radioCoalesceMonth
+            // 
+            this.radioCoalesceMonth.AutoSize = true;
+            this.radioCoalesceMonth.Location = new System.Drawing.Point(11, 68);
+            this.radioCoalesceMonth.Name = "radioCoalesceMonth";
+            this.radioCoalesceMonth.Size = new System.Drawing.Size(100, 17);
+            this.radioCoalesceMonth.TabIndex = 2;
+            this.radioCoalesceMonth.Text = "Selected Month";
+            this.radioCoalesceMonth.UseVisualStyleBackColor = true;
+            // 
+            // radioCoalesceYear
+            // 
+            this.radioCoalesceYear.AutoSize = true;
+            this.radioCoalesceYear.Location = new System.Drawing.Point(11, 44);
+            this.radioCoalesceYear.Name = "radioCoalesceYear";
+            this.radioCoalesceYear.Size = new System.Drawing.Size(92, 17);
+            this.radioCoalesceYear.TabIndex = 1;
+            this.radioCoalesceYear.Text = "Selected Year";
+            this.radioCoalesceYear.UseVisualStyleBackColor = true;
+            // 
+            // radioCoalesceAll
+            // 
+            this.radioCoalesceAll.AutoSize = true;
+            this.radioCoalesceAll.Checked = true;
+            this.radioCoalesceAll.Location = new System.Drawing.Point(11, 20);
+            this.radioCoalesceAll.Name = "radioCoalesceAll";
+            this.radioCoalesceAll.Size = new System.Drawing.Size(62, 17);
+            this.radioCoalesceAll.TabIndex = 0;
+            this.radioCoalesceAll.TabStop = true;
+            this.radioCoalesceAll.Text = "All Time";
+            this.radioCoalesceAll.UseVisualStyleBackColor = true;
+            // 
+            // lblCoalesceLogs
+            // 
+            this.lblCoalesceLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCoalesceLogs.AutoSize = true;
+            this.lblCoalesceLogs.Location = new System.Drawing.Point(818, 65);
+            this.lblCoalesceLogs.Name = "lblCoalesceLogs";
+            this.lblCoalesceLogs.Size = new System.Drawing.Size(120, 13);
+            this.lblCoalesceLogs.TabIndex = 2;
+            this.lblCoalesceLogs.Text = "Coalesce Log Files for...";
+            // 
+            // dtpFilter
+            // 
+            this.dtpFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpFilter.Location = new System.Drawing.Point(818, 23);
+            this.dtpFilter.Name = "dtpFilter";
+            this.dtpFilter.Size = new System.Drawing.Size(151, 20);
+            this.dtpFilter.TabIndex = 1;
+            // 
+            // logFileViewerFilter
+            // 
+            this.logFileViewerFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.logFileViewerFilter.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.logFileViewerFilter.Location = new System.Drawing.Point(17, 23);
+            this.logFileViewerFilter.LogFileContent = new string[0];
+            this.logFileViewerFilter.Name = "logFileViewerFilter";
+            this.logFileViewerFilter.Size = new System.Drawing.Size(780, 644);
+            this.logFileViewerFilter.TabIndex = 0;
             // 
             // menuStrip1
             // 
@@ -1549,6 +1722,11 @@ namespace MeteorWatch
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TwentyFourHourGrid)).EndInit();
+            this.tabFilter.ResumeLayout(false);
+            this.tabFilter.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -1667,7 +1845,7 @@ namespace MeteorWatch
         private System.Windows.Forms.Button btnSaveProgress;
         private System.Windows.Forms.CheckBox checkDropHistory;
         private System.Windows.Forms.CheckBox checkGenerateRMOB;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dtpRMOB;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtWhatIf;
         private System.Windows.Forms.RadioButton radioColourByRandom;
@@ -1682,6 +1860,19 @@ namespace MeteorWatch
         private System.Windows.Forms.Button btnRecreateRmob;
         private System.Windows.Forms.Button btnNormalise;
         private System.Windows.Forms.Label lblLogIndexPrompt;
+        private System.Windows.Forms.TabPage tabFilter;
+        private System.Windows.Forms.Button btnCoalesce;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton radioCoalesceMonth;
+        private System.Windows.Forms.RadioButton radioCoalesceYear;
+        private System.Windows.Forms.RadioButton radioCoalesceAll;
+        private System.Windows.Forms.Label lblCoalesceLogs;
+        private System.Windows.Forms.DateTimePicker dtpFilter;
+        private LogFileViewer logFileViewerFilter;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.CheckedListBox checkedListClassesFilter;
+        private System.Windows.Forms.Label lblCategoriesFilter;
+        private System.Windows.Forms.Label lblConfigNotSaved;
     }
 }
 

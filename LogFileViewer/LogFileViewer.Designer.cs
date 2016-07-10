@@ -2,10 +2,6 @@
 {
     partial class LogFileViewer
     {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        public System.ComponentModel.IContainer components = null;
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -28,6 +24,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnUndo = new System.Windows.Forms.Button();
             this.btnApplyClassification = new System.Windows.Forms.Button();
             this.comboClasses = new System.Windows.Forms.ComboBox();
@@ -35,8 +32,13 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.btnSplit = new System.Windows.Forms.Button();
             this.dgv = new System.Windows.Forms.DataGridView();
+            this.contextMenuGridStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copySelectedImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblSelectedRowCount = new System.Windows.Forms.Label();
+            this.folderBrowserDialogPopup = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+            this.contextMenuGridStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnUndo
@@ -128,15 +130,43 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv.ContextMenuStrip = this.contextMenuGridStrip;
             this.dgv.Location = new System.Drawing.Point(3, 3);
             this.dgv.Name = "dgv";
             this.dgv.Size = new System.Drawing.Size(641, 383);
             this.dgv.TabIndex = 6;
+            this.dgv.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_CellMouseDown);
             this.dgv.SelectionChanged += new System.EventHandler(this.dgv_SelectionChanged);
+            // 
+            // contextMenuGridStrip
+            // 
+            this.contextMenuGridStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copySelectedImagesToolStripMenuItem});
+            this.contextMenuGridStrip.Name = "contextMenuGridStrip";
+            this.contextMenuGridStrip.Size = new System.Drawing.Size(200, 26);
+            this.contextMenuGridStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuGridStrip_Opening);
+            this.contextMenuGridStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuGridStrip_ItemClicked);
+            // 
+            // copySelectedImagesToolStripMenuItem
+            // 
+            this.copySelectedImagesToolStripMenuItem.Name = "copySelectedImagesToolStripMenuItem";
+            this.copySelectedImagesToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.copySelectedImagesToolStripMenuItem.Text = "Copy Selected Images...";
+            // 
+            // lblSelectedRowCount
+            // 
+            this.lblSelectedRowCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblSelectedRowCount.AutoSize = true;
+            this.lblSelectedRowCount.Location = new System.Drawing.Point(305, 433);
+            this.lblSelectedRowCount.Name = "lblSelectedRowCount";
+            this.lblSelectedRowCount.Size = new System.Drawing.Size(14, 13);
+            this.lblSelectedRowCount.TabIndex = 7;
+            this.lblSelectedRowCount.Text = "#";
             // 
             // LogFileViewer
             // 
             this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.Controls.Add(this.lblSelectedRowCount);
             this.Controls.Add(this.dgv);
             this.Controls.Add(this.btnUndo);
             this.Controls.Add(this.btnApplyClassification);
@@ -149,7 +179,9 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LogFileViewer_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+            this.contextMenuGridStrip.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -162,6 +194,11 @@
         public System.Windows.Forms.NumericUpDown numericUpDown1;
         public System.Windows.Forms.Button btnSplit;
         private System.Windows.Forms.DataGridView dgv;
+        private System.Windows.Forms.ContextMenuStrip contextMenuGridStrip;
+        private System.Windows.Forms.ToolStripMenuItem copySelectedImagesToolStripMenuItem;
+        private System.ComponentModel.IContainer components;
+        private System.Windows.Forms.Label lblSelectedRowCount;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialogPopup;
 
     }
 }

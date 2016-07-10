@@ -115,7 +115,7 @@ namespace LogComponent
                 string[] parts = line.Split(new char[] { ',' });
 
                 // Should be at least 5 parts to each row: Time, event, etc (see Index enum)...
-                if (parts.Length > 5)
+                if (parts.Length > 5 && parts[0].Contains(':'))
                 {
                     DataGridViewRow newRow = new DataGridViewRow();
 

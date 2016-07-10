@@ -17,7 +17,7 @@ namespace MeteorWatch
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
             string rmobFileName = "";
-            currentVirtualRmobDate = dateTimePicker2.Value;
+            currentVirtualRmobDate = dtpRMOB.Value;
             MakeRmobFileName(true, out rmobFileName);
             LoadRmobFile(rmobFileName);
             RedrawPreview(currentVirtualRmobDate);
@@ -356,7 +356,7 @@ namespace MeteorWatch
 
                 SaveRmobFile(true);
             }
-            RedrawPreview(dateTimePicker2.Value);
+            RedrawPreview(dtpRMOB.Value);
         }
 
         private string GetFileNameFilter()
@@ -369,8 +369,8 @@ namespace MeteorWatch
             }
             else
             {
-                string month = dateTimePicker2.Value.ToString("MM");
-                string year = dateTimePicker2.Value.ToString("yyyy");
+                string month = dtpRMOB.Value.ToString("MM");
+                string year = dtpRMOB.Value.ToString("yyyy");
 
                 if (radioRmobYear.Checked)
                 {
@@ -402,8 +402,8 @@ namespace MeteorWatch
             else if (radioRmobMonth.Checked)
             {
                 // Select all files matching the selected month and year...
-                string month = dateTimePicker2.Value.ToString("MMM");
-                string year = dateTimePicker2.Value.ToString("yyyy");
+                string month = dtpRMOB.Value.ToString("MMM");
+                string year = dtpRMOB.Value.ToString("yyyy");
 
                 DialogResult res = MessageBox.Show(string.Format("RMOB files for {0} {1} for this station will be deleted. Do you wish to continue?", month, year), "Warning", MessageBoxButtons.YesNo);
 
@@ -419,7 +419,7 @@ namespace MeteorWatch
             else if (radioRmobYear.Checked)
             {
                 // Select all files matching selected year...
-                string year = dateTimePicker2.Value.Year.ToString();
+                string year = dtpRMOB.Value.Year.ToString();
 
                 DialogResult res = MessageBox.Show(string.Format("{0} RMOB file for this station will be deleted. Do you wish to continue?", year), "Warning", MessageBoxButtons.YesNo);
 

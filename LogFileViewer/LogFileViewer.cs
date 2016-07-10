@@ -35,6 +35,8 @@ namespace LogComponent
         private string[] LogFile;
         private bool sortedByTime = true;
         private bool controlKeyDown = false;
+        private bool contextMenuRequired = false;
+
         private string firstSelectedImage = string.Empty;
 
         // Categories of phenomenon...
@@ -511,14 +513,17 @@ namespace LogComponent
 
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
         {
-            btnApplyClassification.Enabled = true;
-            btnApplyClassification.Focus();
+            if (dgv.SelectedRows != null && dgv.SelectedRows.Count > 0)
+            {
+                btnApplyClassification.Enabled = true;
+                btnApplyClassification.Focus();
+            }
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             // We should only be able to split into 2 or more rows.
-            if (dgv.SelectedRows.Count == 1)
+            if (dgv.SelectedRows != null && dgv.SelectedRows.Count == 1)
             {
                 if (!btnSplit.Enabled)
                 {
@@ -632,6 +637,8 @@ namespace LogComponent
             {
                 comboClasses.Enabled = true;
             }
+
+            lblSelectedRowCount.Text = dgv.SelectedRows.Count.ToString();
         }
 
         public void LogFileViewer_KeyDown(object sender, KeyEventArgs e)
@@ -688,6 +695,56 @@ namespace LogComponent
 
                 controlKeyDown = false;
                 e.Handled = true;            
+            }
+        }
+
+        private void dgv_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right && e.ColumnIndex == 7)
+            {
+                contextMenuRequired = true;
+            }
+        }
+
+        private void contextMenuGridStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            contextMenuGridStrip.Hide();
+
+            if (dgv.SelectedRows.Count > 0)
+            {
+                folderBrowserDialogPopup.SelectedPath = Environment.CurrentDirectory;
+
+                if (DialogResult.OK == folderBrowserDialogPopup.ShowDialog() &&
+                    Directory.Exists(folderBrowserDialogPopup.SelectedPath))
+                {
+                    foreach (DataGridViewRow row in dgv.SelectedRows)
+                    {
+                        object cellValue = row.Cells[7].Value;
+
+                        if (cellValue != null)
+                        {
+                            string imagePath = cellValue.ToString();
+
+                            if (File.Exists(imagePath))
+                            {
+                                File.Copy(imagePath, Path.Combine(folderBrowserDialogPopup.SelectedPath, new FileInfo(imagePath).Name));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void contextMenuGridStrip_Opening(object sender, CancelEventArgs e)
+        {
+            if (!contextMenuRequired)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                // Reset the flag...
+                contextMenuRequired = false;
             }
         } 
     }
