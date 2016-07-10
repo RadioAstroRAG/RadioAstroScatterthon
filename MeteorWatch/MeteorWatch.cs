@@ -123,7 +123,7 @@ namespace MeteorWatch
             SetupTwentyFourHourMargin();
         }
 
-        public void SetCurrentLogIndex(bool? increment)
+        public void SetCurrentLogIndex(bool? increment, int? index)
         {
             // Do another check on how many files we have...
             string[] files = Directory.GetFiles(config.OriginalLogsDirectory, "event_log20*.txt");
@@ -142,7 +142,16 @@ namespace MeteorWatch
 
             if (increment == null)
             {
-                int inputFileNumber = int.Parse(txtLogIndex.Text);
+                int inputFileNumber = 0;
+                
+                if (!string.IsNullOrEmpty(txtLogIndex.Text))
+                {
+                    inputFileNumber = int.Parse(txtLogIndex.Text);
+                }
+                else if (index != null)
+                {
+                    inputFileNumber = (int)index;
+                }
 
                 if (inputFileNumber == 0 || inputFileNumber > files.Length)
                 {
@@ -304,7 +313,7 @@ namespace MeteorWatch
             IQueryable<DateTime> qTimestamps = timestamps.OfType<DateTime>().AsQueryable().OrderByDescending(dt => dt);
 
             // Spanning a month...
-            DateTime startPoint = new DateTime(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, 1, 0, 0, 0, 0);
+            DateTime startPoint = new DateTime(dtpPreview.Value.Year, dtpPreview.Value.Month, 1, 0, 0, 0, 0);
             DateTime endPoint = startPoint.Add(new TimeSpan(daysInMonth, 0, 0, 0, 0));
 
             TimeSpan period = new TimeSpan(0, offsetInMinutes, 0);
@@ -484,7 +493,8 @@ namespace MeteorWatch
         private void btnNextLog_Click(object sender, EventArgs e)
         {
             ClearScreenshots();
-            SetCurrentLogIndex(true);
+            SetCurrentLogIndex(true, null);
+            SetDatePickerToCurrentLogDate();
         }
 
         /// <summary>
@@ -497,7 +507,8 @@ namespace MeteorWatch
         private void btnPrevLog_Click(object sender, EventArgs e)
         {
             ClearScreenshots();
-            SetCurrentLogIndex(false);
+            SetCurrentLogIndex(false, null);
+            SetDatePickerToCurrentLogDate();
         }
 
         private void Scatterthon_Load(object sender, EventArgs e)
@@ -554,7 +565,7 @@ namespace MeteorWatch
                 switch ((sender as TabControl).SelectedTab.Text)
                 {
                     case "Preview":                        
-                        dateTimePicker1.Value = currentLogDate;
+                        dtpPreview.Value = currentLogDate;
                         break;
 
                     case "RMOB":
@@ -594,7 +605,8 @@ namespace MeteorWatch
                 e.Handled = true;
 
                 ClearScreenshots();
-                SetCurrentLogIndex(null);
+                SetCurrentLogIndex(null, null);
+                SetDatePickerToCurrentLogDate();
             }
         }
 
@@ -611,6 +623,23 @@ namespace MeteorWatch
             if (result == System.Windows.Forms.DialogResult.Cancel)
             {
                 e.Cancel = true;
+            }
+        }
+
+        private void dtpCleanse_ValueChanged(object sender, EventArgs e)
+        {
+            string strDate = dtpCleanse.Value.ToString("yyMMdd");
+            
+            string[] files = Directory.GetFiles(config.OriginalLogsDirectory, "event_log20*.txt");
+            
+            for(int i = 0; i < files.Length; i++)
+            {
+                if (files[i].EndsWith(strDate + ".txt"))
+                {
+                    ClearScreenshots();
+                    SetCurrentLogIndex(null, ++i);
+                    return;
+                }
             }
         }
     }

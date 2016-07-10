@@ -43,7 +43,7 @@ namespace MeteorWatch
             List<DateTime> timestamps = GetTimestampsToView();
 
             // How many columns?
-            int daysInMonth = DateTime.DaysInMonth(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            int daysInMonth = DateTime.DaysInMonth(dtpPreview.Value.Year, dtpPreview.Value.Month);
 
             int maxEventsThisMonth = 0;
             int numberOfRows = 0;
@@ -108,7 +108,7 @@ namespace MeteorWatch
             List<DateTime> timestampList = new List<DateTime>();
 
             // Prepare file names...
-            string fileName = string.Format("event_log{0}*.txt", dateTimePicker1.Value.ToString("yyyyMM"));
+            string fileName = string.Format("event_log{0}*.txt", dtpPreview.Value.ToString("yyyyMM"));
 
             List<string> selectedItems = new List<string>();
 

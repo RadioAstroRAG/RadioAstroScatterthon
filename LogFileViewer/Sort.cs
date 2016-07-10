@@ -48,7 +48,8 @@ namespace LogComponent
                         sortedByTime = true;
                     }
                 }
-                else if (columnIndex == (int)Index.Image)
+                else if (columnIndex == (int)Index.Image ||
+                         columnIndex == (int)Index.Class)
                 {
                     string a = (e.CellValue1 == null ? "" : e.CellValue1.ToString());
                     string b = (e.CellValue2 == null ? "" : e.CellValue2.ToString());

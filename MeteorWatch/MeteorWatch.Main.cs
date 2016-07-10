@@ -248,6 +248,13 @@ namespace MeteorWatch
                 // Log file loaded, so we can enable navigation...
                 btnNextLog.Enabled = true;
             }
+            SetDatePickerToCurrentLogDate();
+        }
+
+        private void SetDatePickerToCurrentLogDate()
+        {
+            GetCurrentLogDate(currentLogFileName, out currentLogDate);
+            dtpCleanse.Value = currentLogDate;
         }
 
         private Dictionary<int, int> SumUpTimePeriods(string[] processedLogLines)

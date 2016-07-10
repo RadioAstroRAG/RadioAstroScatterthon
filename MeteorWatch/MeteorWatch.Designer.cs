@@ -34,9 +34,10 @@ namespace MeteorWatch
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Scatterthon));
             this.tabRmob = new System.Windows.Forms.TabPage();
+            this.btnCapture = new System.Windows.Forms.Button();
             this.btnRecreateRmob = new System.Windows.Forms.Button();
             this.btnNormalise = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -54,40 +55,6 @@ namespace MeteorWatch
             this.btnExport = new System.Windows.Forms.Button();
             this.lblPreviewedMonth = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Colours = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Scale = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnImportColorgram = new System.Windows.Forms.Button();
             this.tabConfig = new System.Windows.Forms.TabPage();
             this.btnSaveConfig = new System.Windows.Forms.Button();
@@ -136,6 +103,7 @@ namespace MeteorWatch
             this.innerSplitContainer = new System.Windows.Forms.SplitContainer();
             this.logFileComponent = new LogComponent.LogFileViewer();
             this.lblLogName = new System.Windows.Forms.Label();
+            this.dtpCleanse = new System.Windows.Forms.DateTimePicker();
             this.lblLogIndexPrompt = new System.Windows.Forms.Label();
             this.lblLogScroll = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -149,7 +117,7 @@ namespace MeteorWatch
             this.tabPreview = new System.Windows.Forms.TabPage();
             this.lblCategories = new System.Windows.Forms.Label();
             this.lblTimeUnit = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpPreview = new System.Windows.Forms.DateTimePicker();
             this.btnView = new System.Windows.Forms.Button();
             this.comboPeriod = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -173,6 +141,40 @@ namespace MeteorWatch
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutScatterthonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Colours = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Scale = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabRmob.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -203,6 +205,7 @@ namespace MeteorWatch
             // 
             // tabRmob
             // 
+            this.tabRmob.Controls.Add(this.btnCapture);
             this.tabRmob.Controls.Add(this.btnRecreateRmob);
             this.tabRmob.Controls.Add(this.btnNormalise);
             this.tabRmob.Controls.Add(this.groupBox3);
@@ -221,6 +224,16 @@ namespace MeteorWatch
             this.tabRmob.TabIndex = 0;
             this.tabRmob.Text = "RMOB";
             this.tabRmob.UseVisualStyleBackColor = true;
+            // 
+            // btnCapture
+            // 
+            this.btnCapture.Location = new System.Drawing.Point(895, 390);
+            this.btnCapture.Name = "btnCapture";
+            this.btnCapture.Size = new System.Drawing.Size(75, 23);
+            this.btnCapture.TabIndex = 33;
+            this.btnCapture.Text = "Capture";
+            this.btnCapture.UseVisualStyleBackColor = true;
+            this.btnCapture.Click += new System.EventHandler(this.btnCapture_Click);
             // 
             // btnRecreateRmob
             // 
@@ -371,7 +384,7 @@ namespace MeteorWatch
             this.dtpRMOB.Name = "dtpRMOB";
             this.dtpRMOB.Size = new System.Drawing.Size(151, 20);
             this.dtpRMOB.TabIndex = 26;
-            this.dtpRMOB.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
+            this.dtpRMOB.ValueChanged += new System.EventHandler(this.dtpRMOB_ValueChanged);
             // 
             // btnExport
             // 
@@ -406,14 +419,14 @@ namespace MeteorWatch
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -456,280 +469,8 @@ namespace MeteorWatch
             this.dataGridView1.RowHeadersWidth = 55;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridView1.Size = new System.Drawing.Size(686, 429);
+            this.dataGridView1.Size = new System.Drawing.Size(666, 429);
             this.dataGridView1.TabIndex = 4;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "1";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column1.Width = 27;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "2";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column2.Width = 27;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "3";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column3.Width = 27;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "4";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column4.Width = 27;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "5";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column5.Width = 27;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "6";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column6.Width = 27;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "7";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            this.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column7.Width = 27;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "8";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            this.Column8.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column8.Width = 27;
-            // 
-            // Column9
-            // 
-            this.Column9.HeaderText = "9";
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            this.Column9.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column9.Width = 27;
-            // 
-            // Column10
-            // 
-            this.Column10.HeaderText = "10";
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            this.Column10.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column10.Width = 27;
-            // 
-            // Column11
-            // 
-            this.Column11.HeaderText = "11";
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            this.Column11.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column11.Width = 27;
-            // 
-            // Column12
-            // 
-            this.Column12.HeaderText = "12";
-            this.Column12.Name = "Column12";
-            this.Column12.ReadOnly = true;
-            this.Column12.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column12.Width = 27;
-            // 
-            // Column13
-            // 
-            this.Column13.HeaderText = "13";
-            this.Column13.Name = "Column13";
-            this.Column13.ReadOnly = true;
-            this.Column13.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column13.Width = 27;
-            // 
-            // Column14
-            // 
-            this.Column14.HeaderText = "14";
-            this.Column14.Name = "Column14";
-            this.Column14.ReadOnly = true;
-            this.Column14.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column14.Width = 27;
-            // 
-            // Column15
-            // 
-            this.Column15.HeaderText = "15";
-            this.Column15.Name = "Column15";
-            this.Column15.ReadOnly = true;
-            this.Column15.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column15.Width = 27;
-            // 
-            // Column16
-            // 
-            this.Column16.HeaderText = "16";
-            this.Column16.Name = "Column16";
-            this.Column16.ReadOnly = true;
-            this.Column16.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column16.Width = 27;
-            // 
-            // Column17
-            // 
-            this.Column17.HeaderText = "17";
-            this.Column17.Name = "Column17";
-            this.Column17.ReadOnly = true;
-            this.Column17.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column17.Width = 27;
-            // 
-            // Column18
-            // 
-            this.Column18.HeaderText = "18";
-            this.Column18.Name = "Column18";
-            this.Column18.ReadOnly = true;
-            this.Column18.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column18.Width = 27;
-            // 
-            // Column19
-            // 
-            this.Column19.HeaderText = "19";
-            this.Column19.Name = "Column19";
-            this.Column19.ReadOnly = true;
-            this.Column19.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column19.Width = 27;
-            // 
-            // Column20
-            // 
-            this.Column20.HeaderText = "20";
-            this.Column20.Name = "Column20";
-            this.Column20.ReadOnly = true;
-            this.Column20.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column20.Width = 27;
-            // 
-            // Column21
-            // 
-            this.Column21.HeaderText = "21";
-            this.Column21.Name = "Column21";
-            this.Column21.ReadOnly = true;
-            this.Column21.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column21.Width = 27;
-            // 
-            // Column22
-            // 
-            this.Column22.HeaderText = "22";
-            this.Column22.Name = "Column22";
-            this.Column22.ReadOnly = true;
-            this.Column22.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column22.Width = 27;
-            // 
-            // Column23
-            // 
-            this.Column23.HeaderText = "23";
-            this.Column23.Name = "Column23";
-            this.Column23.ReadOnly = true;
-            this.Column23.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column23.Width = 27;
-            // 
-            // Column24
-            // 
-            this.Column24.HeaderText = "24";
-            this.Column24.Name = "Column24";
-            this.Column24.ReadOnly = true;
-            this.Column24.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column24.Width = 27;
-            // 
-            // Column25
-            // 
-            this.Column25.HeaderText = "25";
-            this.Column25.Name = "Column25";
-            this.Column25.ReadOnly = true;
-            this.Column25.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column25.Width = 27;
-            // 
-            // Column26
-            // 
-            this.Column26.HeaderText = "26";
-            this.Column26.Name = "Column26";
-            this.Column26.ReadOnly = true;
-            this.Column26.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column26.Width = 27;
-            // 
-            // Column27
-            // 
-            this.Column27.HeaderText = "27";
-            this.Column27.Name = "Column27";
-            this.Column27.ReadOnly = true;
-            this.Column27.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column27.Width = 27;
-            // 
-            // Column28
-            // 
-            this.Column28.HeaderText = "28";
-            this.Column28.Name = "Column28";
-            this.Column28.ReadOnly = true;
-            this.Column28.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column28.Width = 27;
-            // 
-            // Column29
-            // 
-            this.Column29.HeaderText = "29";
-            this.Column29.Name = "Column29";
-            this.Column29.ReadOnly = true;
-            this.Column29.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column29.Width = 27;
-            // 
-            // Column30
-            // 
-            this.Column30.HeaderText = "30";
-            this.Column30.Name = "Column30";
-            this.Column30.ReadOnly = true;
-            this.Column30.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column30.Width = 27;
-            // 
-            // Column31
-            // 
-            this.Column31.HeaderText = "31";
-            this.Column31.Name = "Column31";
-            this.Column31.ReadOnly = true;
-            this.Column31.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column31.Width = 20;
-            // 
-            // Column32
-            // 
-            this.Column32.HeaderText = "";
-            this.Column32.Name = "Column32";
-            this.Column32.ReadOnly = true;
-            this.Column32.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column32.Width = 17;
-            // 
-            // Colours
-            // 
-            this.Colours.HeaderText = "";
-            this.Colours.Name = "Colours";
-            this.Colours.ReadOnly = true;
-            this.Colours.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Colours.Width = 17;
-            // 
-            // Scale
-            // 
-            this.Scale.HeaderText = "";
-            this.Scale.Name = "Scale";
-            this.Scale.ReadOnly = true;
-            this.Scale.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Scale.Width = 50;
             // 
             // btnImportColorgram
             // 
@@ -1057,7 +798,7 @@ namespace MeteorWatch
             // 
             this.btnPrevLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrevLog.Enabled = false;
-            this.btnPrevLog.Location = new System.Drawing.Point(503, 628);
+            this.btnPrevLog.Location = new System.Drawing.Point(348, 628);
             this.btnPrevLog.Name = "btnPrevLog";
             this.btnPrevLog.Size = new System.Drawing.Size(75, 23);
             this.btnPrevLog.TabIndex = 10;
@@ -1070,7 +811,7 @@ namespace MeteorWatch
             // 
             this.btnNextLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNextLog.Enabled = false;
-            this.btnNextLog.Location = new System.Drawing.Point(582, 628);
+            this.btnNextLog.Location = new System.Drawing.Point(427, 628);
             this.btnNextLog.Name = "btnNextLog";
             this.btnNextLog.Size = new System.Drawing.Size(75, 23);
             this.btnNextLog.TabIndex = 11;
@@ -1107,7 +848,7 @@ namespace MeteorWatch
             // txtLogIndex
             // 
             this.txtLogIndex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLogIndex.Location = new System.Drawing.Point(423, 630);
+            this.txtLogIndex.Location = new System.Drawing.Point(268, 630);
             this.txtLogIndex.Name = "txtLogIndex";
             this.txtLogIndex.Size = new System.Drawing.Size(73, 20);
             this.txtLogIndex.TabIndex = 19;
@@ -1189,6 +930,7 @@ namespace MeteorWatch
             // innerSplitContainer.Panel2
             // 
             this.innerSplitContainer.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.innerSplitContainer.Panel2.Controls.Add(this.dtpCleanse);
             this.innerSplitContainer.Panel2.Controls.Add(this.lblLogIndexPrompt);
             this.innerSplitContainer.Panel2.Controls.Add(this.btnSaveProgress);
             this.innerSplitContainer.Panel2.Controls.Add(this.txtLogIndex);
@@ -1227,11 +969,20 @@ namespace MeteorWatch
             this.lblLogName.Text = "LOG: Double-click \'Original log files directory\' in Config tab to set logs\' folde" +
     "r...";
             // 
+            // dtpCleanse
+            // 
+            this.dtpCleanse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpCleanse.Location = new System.Drawing.Point(508, 630);
+            this.dtpCleanse.Name = "dtpCleanse";
+            this.dtpCleanse.Size = new System.Drawing.Size(151, 20);
+            this.dtpCleanse.TabIndex = 24;
+            this.dtpCleanse.ValueChanged += new System.EventHandler(this.dtpCleanse_ValueChanged);
+            // 
             // lblLogIndexPrompt
             // 
             this.lblLogIndexPrompt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblLogIndexPrompt.AutoSize = true;
-            this.lblLogIndexPrompt.Location = new System.Drawing.Point(266, 634);
+            this.lblLogIndexPrompt.Location = new System.Drawing.Point(111, 634);
             this.lblLogIndexPrompt.Name = "lblLogIndexPrompt";
             this.lblLogIndexPrompt.Size = new System.Drawing.Size(152, 13);
             this.lblLogIndexPrompt.TabIndex = 23;
@@ -1365,7 +1116,7 @@ namespace MeteorWatch
             // 
             this.tabPreview.Controls.Add(this.lblCategories);
             this.tabPreview.Controls.Add(this.lblTimeUnit);
-            this.tabPreview.Controls.Add(this.dateTimePicker1);
+            this.tabPreview.Controls.Add(this.dtpPreview);
             this.tabPreview.Controls.Add(this.btnView);
             this.tabPreview.Controls.Add(this.comboPeriod);
             this.tabPreview.Controls.Add(this.groupBox1);
@@ -1398,13 +1149,13 @@ namespace MeteorWatch
             this.lblTimeUnit.TabIndex = 18;
             this.lblTimeUnit.Text = "Select Unit of Time (Hour)...";
             // 
-            // dateTimePicker1
+            // dtpPreview
             // 
-            this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(818, 23);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(151, 20);
-            this.dateTimePicker1.TabIndex = 16;
+            this.dtpPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpPreview.Location = new System.Drawing.Point(818, 23);
+            this.dtpPreview.Name = "dtpPreview";
+            this.dtpPreview.Size = new System.Drawing.Size(151, 20);
+            this.dtpPreview.TabIndex = 16;
             // 
             // btnView
             // 
@@ -1678,6 +1429,277 @@ namespace MeteorWatch
             this.aboutScatterthonToolStripMenuItem.Text = "About Scatterthon";
             this.aboutScatterthonToolStripMenuItem.Click += new System.EventHandler(this.aboutScatterthonToolStripMenuItem_Click);
             // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "1";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column1.Width = 27;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "2";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column2.Width = 27;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "3";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column3.Width = 27;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "4";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column4.Width = 27;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "5";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column5.Width = 27;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "6";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column6.Width = 27;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "7";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column7.Width = 27;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "8";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column8.Width = 27;
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "9";
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            this.Column9.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column9.Width = 27;
+            // 
+            // Column10
+            // 
+            this.Column10.HeaderText = "10";
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            this.Column10.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column10.Width = 27;
+            // 
+            // Column11
+            // 
+            this.Column11.HeaderText = "11";
+            this.Column11.Name = "Column11";
+            this.Column11.ReadOnly = true;
+            this.Column11.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column11.Width = 27;
+            // 
+            // Column12
+            // 
+            this.Column12.HeaderText = "12";
+            this.Column12.Name = "Column12";
+            this.Column12.ReadOnly = true;
+            this.Column12.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column12.Width = 27;
+            // 
+            // Column13
+            // 
+            this.Column13.HeaderText = "13";
+            this.Column13.Name = "Column13";
+            this.Column13.ReadOnly = true;
+            this.Column13.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column13.Width = 27;
+            // 
+            // Column14
+            // 
+            this.Column14.HeaderText = "14";
+            this.Column14.Name = "Column14";
+            this.Column14.ReadOnly = true;
+            this.Column14.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column14.Width = 27;
+            // 
+            // Column15
+            // 
+            this.Column15.HeaderText = "15";
+            this.Column15.Name = "Column15";
+            this.Column15.ReadOnly = true;
+            this.Column15.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column15.Width = 27;
+            // 
+            // Column16
+            // 
+            this.Column16.HeaderText = "16";
+            this.Column16.Name = "Column16";
+            this.Column16.ReadOnly = true;
+            this.Column16.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column16.Width = 27;
+            // 
+            // Column17
+            // 
+            this.Column17.HeaderText = "17";
+            this.Column17.Name = "Column17";
+            this.Column17.ReadOnly = true;
+            this.Column17.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column17.Width = 27;
+            // 
+            // Column18
+            // 
+            this.Column18.HeaderText = "18";
+            this.Column18.Name = "Column18";
+            this.Column18.ReadOnly = true;
+            this.Column18.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column18.Width = 27;
+            // 
+            // Column19
+            // 
+            this.Column19.HeaderText = "19";
+            this.Column19.Name = "Column19";
+            this.Column19.ReadOnly = true;
+            this.Column19.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column19.Width = 27;
+            // 
+            // Column20
+            // 
+            this.Column20.HeaderText = "20";
+            this.Column20.Name = "Column20";
+            this.Column20.ReadOnly = true;
+            this.Column20.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column20.Width = 27;
+            // 
+            // Column21
+            // 
+            this.Column21.HeaderText = "21";
+            this.Column21.Name = "Column21";
+            this.Column21.ReadOnly = true;
+            this.Column21.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column21.Width = 27;
+            // 
+            // Column22
+            // 
+            this.Column22.HeaderText = "22";
+            this.Column22.Name = "Column22";
+            this.Column22.ReadOnly = true;
+            this.Column22.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column22.Width = 27;
+            // 
+            // Column23
+            // 
+            this.Column23.HeaderText = "23";
+            this.Column23.Name = "Column23";
+            this.Column23.ReadOnly = true;
+            this.Column23.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column23.Width = 27;
+            // 
+            // Column24
+            // 
+            this.Column24.HeaderText = "24";
+            this.Column24.Name = "Column24";
+            this.Column24.ReadOnly = true;
+            this.Column24.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column24.Width = 27;
+            // 
+            // Column25
+            // 
+            this.Column25.HeaderText = "25";
+            this.Column25.Name = "Column25";
+            this.Column25.ReadOnly = true;
+            this.Column25.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column25.Width = 27;
+            // 
+            // Column26
+            // 
+            this.Column26.HeaderText = "26";
+            this.Column26.Name = "Column26";
+            this.Column26.ReadOnly = true;
+            this.Column26.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column26.Width = 27;
+            // 
+            // Column27
+            // 
+            this.Column27.HeaderText = "27";
+            this.Column27.Name = "Column27";
+            this.Column27.ReadOnly = true;
+            this.Column27.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column27.Width = 27;
+            // 
+            // Column28
+            // 
+            this.Column28.HeaderText = "28";
+            this.Column28.Name = "Column28";
+            this.Column28.ReadOnly = true;
+            this.Column28.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column28.Width = 27;
+            // 
+            // Column29
+            // 
+            this.Column29.HeaderText = "29";
+            this.Column29.Name = "Column29";
+            this.Column29.ReadOnly = true;
+            this.Column29.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column29.Width = 27;
+            // 
+            // Column30
+            // 
+            this.Column30.HeaderText = "30";
+            this.Column30.Name = "Column30";
+            this.Column30.ReadOnly = true;
+            this.Column30.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column30.Width = 27;
+            // 
+            // Column31
+            // 
+            this.Column31.HeaderText = "31";
+            this.Column31.Name = "Column31";
+            this.Column31.ReadOnly = true;
+            this.Column31.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column31.Width = 20;
+            // 
+            // Column32
+            // 
+            this.Column32.HeaderText = "";
+            this.Column32.Name = "Column32";
+            this.Column32.ReadOnly = true;
+            this.Column32.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column32.Width = 17;
+            // 
+            // Colours
+            // 
+            this.Colours.HeaderText = "";
+            this.Colours.Name = "Colours";
+            this.Colours.ReadOnly = true;
+            this.Colours.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Colours.Width = 17;
+            // 
+            // Scale
+            // 
+            this.Scale.HeaderText = "";
+            this.Scale.Name = "Scale";
+            this.Scale.ReadOnly = true;
+            this.Scale.Width = 50;
+            // 
             // Scatterthon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1757,40 +1779,6 @@ namespace MeteorWatch
         private System.Windows.Forms.Label lblLogFilePath;
         private System.Windows.Forms.Button btnApplySettings;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column19;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column20;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column22;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column23;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column24;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column25;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column26;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column27;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column28;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column29;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column30;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column31;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column32;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Colours;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Scale;
         public System.Windows.Forms.TextBox txtAnnualTopMeteorCount;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ColorDialog colorDialog1;
@@ -1810,7 +1798,7 @@ namespace MeteorWatch
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnView;
         private System.Windows.Forms.ComboBox comboPeriod;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpPreview;
         private System.Windows.Forms.DataGridView TwentyFourHourGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column33;
         private System.Windows.Forms.ComboBox cmbStationNames;
@@ -1873,6 +1861,42 @@ namespace MeteorWatch
         private System.Windows.Forms.CheckedListBox checkedListClassesFilter;
         private System.Windows.Forms.Label lblCategoriesFilter;
         private System.Windows.Forms.Label lblConfigNotSaved;
+        private System.Windows.Forms.DateTimePicker dtpCleanse;
+        private System.Windows.Forms.Button btnCapture;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column22;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column23;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column24;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column25;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column26;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column27;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column28;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column29;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column30;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column31;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column32;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Colours;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Scale;
     }
 }
 

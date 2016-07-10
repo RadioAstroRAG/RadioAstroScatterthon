@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -14,7 +15,17 @@ namespace MeteorWatch
     {
         #region Button click events... 
         
-        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        private void btnCapture_Click(object sender, EventArgs e)
+        {
+            using (Bitmap bmp = new Bitmap(dataGridView1.ClientSize.Width, dataGridView1.ClientSize.Height))
+            {
+                dataGridView1.DrawToBitmap(bmp, dataGridView1.ClientRectangle);
+                string fileName = string.Format("{0}_{1}.png", dtpRMOB.Value.ToString("yyyyMMM"), DateTime.Now.ToString("yyMMddHHmm"));
+                bmp.Save(Path.Combine(config.RmobFilesDirectory, fileName), ImageFormat.Png);
+            }
+        }
+        
+        private void dtpRMOB_ValueChanged(object sender, EventArgs e)
         {
             string rmobFileName = "";
             currentVirtualRmobDate = dtpRMOB.Value;
