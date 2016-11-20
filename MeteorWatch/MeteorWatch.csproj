@@ -64,6 +64,7 @@
     </Compile>
     <Compile Include="ConfigObject.cs" />
     <Compile Include="GridViewFormatter.cs" />
+    <Compile Include="MeteorWatch.Extra.cs" />
     <Compile Include="MeteorWatch.PicturePopout.cs">
       <SubType>Form</SubType>
     </Compile>
