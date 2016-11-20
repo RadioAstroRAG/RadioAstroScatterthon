@@ -253,8 +253,11 @@ namespace MeteorWatch
 
         private void SetDatePickerToCurrentLogDate()
         {
-            GetCurrentLogDate(currentLogFileName, out currentLogDate);
-            dtpCleanse.Value = currentLogDate;
+            if (!string.IsNullOrEmpty(currentLogFileName))
+            {
+                GetCurrentLogDate(currentLogFileName, out currentLogDate);
+                dtpCleanse.Value = currentLogDate;
+            }
         }
 
         private Dictionary<int, int> SumUpTimePeriods(string[] processedLogLines)
